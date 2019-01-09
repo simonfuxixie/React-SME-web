@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -13,14 +14,42 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+});
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/messages', apiRouter);
+// Handles any requests that don't match the ones above
+app.get('/products', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+app.get('/data_services', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+app.get('/website_app', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+app.get('/e_commerce', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+app.get('/about', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+app.get('/careers', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+app.get('/contact', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

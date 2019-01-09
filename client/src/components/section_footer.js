@@ -24,17 +24,15 @@ class SectionFooter extends Component {
   }
 
   createMenu = () => {
-    let menuList = [];
-    for (let i = 0; i < this.props.footer_menu.length; i ++) {
-      menuList.push(
-        <a href={this.props.footer_menu[i].href}
-          className="text-black"
-          style={{paddingLeft:"20px"}}>
-          {this.props.footer_menu[i].menu_item}
-        </a>
-      );
-    }
-    return menuList;
+    let menu = this.props.footer_menu;
+    let menuList = menu.map((item) =>
+    <a href={item.href}
+       className="text-black"
+       key={item.menu_item}
+       style={{paddingLeft:"20px"}}>
+       {item.menu_item}
+     </a>);
+     return menuList;
   }
 
   render(){
