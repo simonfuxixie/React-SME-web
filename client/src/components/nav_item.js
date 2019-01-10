@@ -18,7 +18,7 @@ class NavItem extends Component {
     let items = this.props.info.nav_subitem;
     let listItems = [];
     for (let i=0; i< items.length; i++) {
-      listItems.push(<MenuDropdownItem url={items[i].url} content={items[i].name} key={i}/>);
+      listItems.push(<MenuDropdownItem url={items[i].url} content={items[i].name} key={items[i].name}/>);
     }
     return listItems;
   }

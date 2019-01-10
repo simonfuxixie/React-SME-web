@@ -25,7 +25,7 @@ class Navbar extends Component {
   createNavbarItems = () => {
     let navbarItemsList = [];
     for (let i = 0; i < this.props.data.length; i ++ ) {
-      navbarItemsList.push(<NavItem info={this.props.data[i]} key={i}/>);
+      navbarItemsList.push(<NavItem info={this.props.data[i]} key={this.props.data[i].nav_item_name}/>);
     }
     return navbarItemsList;
   }

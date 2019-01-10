@@ -12,6 +12,15 @@ import "../assets/theme/css/style.css";
 import "../assets/gallery/style.css";
 import "../assets/mobirise/css/mbr-additional.css";
 
+// For todays date;
+Date.prototype.today = function () {
+  return ((this.getDate() < 10) ? "0":"") + this.getDate() +"-"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"-"+ this.getFullYear();
+  }
+
+// For the time now
+Date.prototype.timeNow = function () {
+  return ((this.getHours() < 10) ? "0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+  }
 
 class ContactForm extends Component {
   constructor(props){
@@ -21,6 +30,7 @@ class ContactForm extends Component {
       email: "",
       phone: "",
       message: "",
+      time: null,
       responseMessage: "",
     }
 
@@ -37,16 +47,25 @@ class ContactForm extends Component {
       });
   }
 
+  componentDidMount() {
+    setInterval( () => {
+      this.setState({
+        time : new Date().toLocaleString(),
+      })
+    }, 1000)
+  }
+
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const {name, email, phone, message,} = this.state;
-    axios.post("/api/messages", {name, email, phone, message,})
+    const {name, email, phone, message, time, } = this.state;
+    axios.post("/api/messages", {name, email, phone, message, time,})
     .then((res) => this.setState({responseMessage: `${res.data}`,}));
   }
 
 
   render(){
-    const {name, email, phone, message,} = this.state;
+    const {name, email, phone, message,time,} = this.state;
     return (
       <section className="mbr-section form1 cid-rdGXhy5QzL" id="form1-m">
         <div class="container">
@@ -106,6 +125,7 @@ class ContactForm extends Component {
                         value={phone}
                         onChange={this.handleInputChange}
                       />
+                      <input type="hidden" name="time" value={time} />
                     </div>
                   </div>
                 </div>
