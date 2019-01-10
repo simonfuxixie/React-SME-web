@@ -6,11 +6,6 @@ var mongoose = require('mongoose');
 
 const ContactMessage = require('../models/message_model');
 
-const DB_USER = "westapps",
-      DB_PASSWORD = "getMoneyIn2019!",
-      DB_SERVER = "ds033317.mlab.com:33317",
-      DB_NAME = "mern_shopping";
-
 // mongodb://<dbuser>:<dbpassword>@ds033317.mlab.com:33317/mern_shopping
 
 app.post('/', function(req, res){
