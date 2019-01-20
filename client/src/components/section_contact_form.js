@@ -12,15 +12,6 @@ import "../assets/theme/css/style.css";
 import "../assets/gallery/style.css";
 import "../assets/mobirise/css/mbr-additional.css";
 
-// For todays date;
-Date.prototype.today = function () {
-  return ((this.getDate() < 10) ? "0":"") + this.getDate() +"-"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"-"+ this.getFullYear();
-  }
-
-// For the time now
-Date.prototype.timeNow = function () {
-  return ((this.getHours() < 10) ? "0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
-  }
 
 class ContactForm extends Component {
   constructor(props){
@@ -30,7 +21,7 @@ class ContactForm extends Component {
       email: "",
       phone: "",
       message: "",
-      time: null,
+      time: "",
       responseMessage: "",
     }
 
@@ -47,12 +38,20 @@ class ContactForm extends Component {
       });
   }
 
+  getDateTime(){
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date+' '+time;
+    return dateTime;
+  }
+
   componentDidMount() {
     setInterval( () => {
       this.setState({
-        time : new Date().toLocaleString(),
+        time : this.getDateTime(),
       })
-    }, 1000)
+    }, 5000)
   }
 
 
@@ -60,7 +59,8 @@ class ContactForm extends Component {
     e.preventDefault();
     const {name, email, phone, message, time, } = this.state;
     axios.post("/api/messages", {name, email, phone, message, time,})
-    .then((res) => this.setState({responseMessage: `${res.data}`,}));
+    .then((res) => this.setState({responseMessage: `${res.data}`,}))
+    .catch((err) => console.log(err) );
   }
 
 
@@ -68,13 +68,13 @@ class ContactForm extends Component {
     const {name, email, phone, message,time,} = this.state;
     return (
       <section className="mbr-section form1 cid-rdGXhy5QzL" id="form1-m">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="title col-12 col-lg-8">
-              <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="title col-12 col-lg-8">
+              <h2 className="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
                 CONTACT FORM
               </h2>
-              <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
+              <h3 className="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
                 Easily add subscribe and contact forms without any server-side integration.
               </h3>
             </div>
@@ -84,7 +84,7 @@ class ContactForm extends Component {
           <div className="row justify-content-center">
             <div className="media-container-column col-lg-8">
               <div data-form-alert="" hidden="">
-                <h5 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-6">
+                <h5 className="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-6">
                  {this.state.responseMessage}
                 </h5>
               </div>

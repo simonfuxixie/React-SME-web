@@ -16,7 +16,7 @@ export default class TextBrief extends Component {
   createTextList = () => {
     let textList = [];
     for (let i = 0; i < this.props.text.length; i ++) {
-      textList.push(<li style={{marginTop:"15px",}}><strong>{this.props.text[i].subtitle}</strong> - {this.props.text[i].content}</li>);
+      textList.push(<li style={{marginTop:"15px",}} key={this.props.text[i].subtitle}><strong>{this.props.text[i].subtitle}</strong> - {this.props.text[i].content}</li>);
     }
     return textList;
   }

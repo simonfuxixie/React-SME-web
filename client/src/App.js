@@ -9,6 +9,7 @@ import ViewAbout from "./views/about";
 import ViewCareers from "./views/careers";
 import ViewContact from "./views/contact";
 import ViewTerms from "./views/terms";
+import ViewSignup from "./views/signup";
 
 import {BrowserRouter, Route} from "react-router-dom";
 
@@ -61,7 +62,7 @@ class App extends Component {
             <div>
               <ViewContact />
             </div>
-          )}/>
+          )}/>          
         </div>
       </BrowserRouter>
     );

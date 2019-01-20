@@ -43,7 +43,7 @@ class SectionFooter extends Component {
             <div className="col-md-3">
               <div className="media-wrap">
                 <a href="/">
-                  <img src="assets/images/logo2.png" alt="WestApps"/>
+                  <img src="/assets/images/logo2.png" alt="WestApps"/>
                 </a>
               </div>
             </div>

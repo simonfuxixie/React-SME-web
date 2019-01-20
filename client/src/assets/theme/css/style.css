@@ -141,9 +141,9 @@ section {
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  -webkit-align-items: start;
-  -ms-flex-align: start;
-  align-items: start; }
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start; }
   .media-container-row .media-size-item {
     width: 400px; }
 

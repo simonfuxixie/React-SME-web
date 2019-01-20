@@ -1,19 +1,58 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require("body-parser");
-//mongoose config, connection and schema info
-var config = require("./config/config.js");
-const mongoose = require('mongoose');
-const ContactMessage = require('./models/message_model');
+var createError = require('http-errors'),
+    express = require('express'),
+    path = require('path'),
+    cookieParser = require('cookie-parser'),
+    logger = require('morgan'),
+    bodyParser = require("body-parser"),
+    passport = require("passport"),
+    localStrategy	=	require('passport-local').Strategy,
+    bcrypt = require('bcrypt'),
+    mongoose = require('mongoose'),
+    session	=	require('express-session'),
+    flash	=	require('connect-flash'),
+    expressValidator = require('express-validator');
+const exphbs = require('express-handlebars');
+const hbsFormHelper = require('handlebars-form-helper');
 
+
+// 1 day for session cookie lifetime
+var SESSION_COOKIE_LIFETIME = 1000 * 60 * 60 * 24;
+// connect to mongodb
+var dbs = require('./dbconnection/dbconnection.js');
+dbs.mongodbConnection();
+
+// var indexRouter = require('./routes/index');
+var usersRouter	=	require('./routes/users');
+var apiRouter = require('./routes/api');
 var app = express();
 
+// Verifies the user is authenticated, else returns unauthorized
+var requireAuthentication = function(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    // send the error as JSON to be nice to clients
+    res.send(401, {
+        error: "Unauthorized",
+    });
+};
+
+const hbs = exphbs.create({
+  defaultLayout: 'layout',
+  extname: '.hbs',
+  layoutsDir: `${__dirname}/views/layouts/`,
+  partialsDir: `${__dirname}/views/partials/`,
+});
+// Call the registerHelper and pass in the handlebars object
+hbsFormHelper.registerHelpers(hbs.handlebars, { namespace: 'form' });
+app.engine('.hbs', hbs.engine);
+app.set('view engine', '.hbs');
+
 // view engine setup
+// app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}));
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('view engine', 'hbs');
+
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -23,27 +62,47 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/api/messages', function(req, res){
-  console.log(req.body);
-  //Set up default mongoose connection
-  var mongoDB = `mongodb://${config.mongodb.db_user}:${config.mongodb.db_password}@${config.mongodb.db_server}/${config.mongodb.db_name}`;
-  mongoose.connect(mongoDB);
-  // Get Mongoose to use the global promise library
-  mongoose.Promise = global.Promise;
-  //Get the default connection
-  var db = mongoose.connection;
-  //Bind connection to error event (to get notification of connection errors)
-  db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-  const doc = new ContactMessage(req.body);
-  doc.save(function(err){
-    if(err) {
-      return res.send(err);
-    }
-  });
-  res.send("Contact info received, thanks! ");
+//Handle EXpress Sessions
+app.use(session({
+	secret:'WestApps secret008' ,
+	saveUninitialized: true,
+	resave: true,  
+}));
+
+
+
+// include passport authentication
+// require("./config/passport_config.js");
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// express messages middleware
+app.use(flash());
+app.use(function(req,res,next) {
+	res.locals.messages = require('express-messages')(req,res);
+	next();
 });
+
+
+//Validator
+app.use(expressValidator({
+	errorFormator: function(param,msg,value) {
+		var namespace = param.split('.')
+		, root = namespace.shift()
+		, formParam = root;
+
+		while(namespace.length) {
+			formParam += '[' + namespace.shift() + ']';
+		}
+
+		return {
+			param 	: formParam,
+			msg 	: msg,
+			value	: value
+		};
+	}
+}));
 
 
 app.get('/', function (req, res) {
@@ -71,20 +130,11 @@ app.get('/contact', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use('/users',usersRouter);
+app.use('/api', apiRouter);
+
+
 
 module.exports = app;
