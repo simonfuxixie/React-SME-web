@@ -9,12 +9,26 @@ var handleError = function (err){
   console.log(err);
 }
 // find each person with a last name matching 'Ghost', selecting the `name` and `occupation` fields
-Users.findOne({ 'email': 'ff3@gg.com' }, function (err, users) {
+// Users.findOne({ 'email': 'Greenspanx.Hamilton@hotmail.com'}, function (err, users) {
+//   if (err) {
+//     throw err;
+//   }
+//   if (!users) {
+//     return console.log('Unknown User');
+//   }
+//   console.log(users.username, users.password, users.id, users);
+//
+//
+// });
+
+Users.findById('5c44757d3dad4f1fd8500053', function (err, users) {
   if (err) {
-    return console.log(err);
-  }else {
-    console.log(users.username, users.password);
+    throw err;
   }
+  if (!users) {
+    return console.log('Unknown User');
+  }
+  console.log(users.username, users.password, users.id, users);
 
 
 });
