@@ -80,23 +80,43 @@ usersRouter.post('/register', [
 
 // user login and authentication
 usersRouter.get('/login', function(req, res, next) {
-  console.log('get login');
-   res.render('login',{
-     //user: req.user.username,
+  res.render('login',{
      loginForm: 'Login',
      errors: req.flash('errors'),
    });
 });
 
 
-usersRouter.post('/login',
-  passport.authenticate('local', { failureRedirect: '/users/login', failureFlash:'Invalid Username or Password' }),
-  function(req, res, next) {
-    //If Local Strategy Comes True
-  	console.log('Authentication Successful');
-    req.flash('okMessage','You are Logged In');
-    req.flash('username',req.body.username);
-    res.redirect('/admin/console');    
+// usersRouter.post('/login',
+//   passport.authenticate('local', {failureRedirect: '/users/login', } ),
+//   function(req, res, next) {
+//     //If Local Strategy Comes True
+//   	console.log('Authentication Successful');
+//     req.flash('okMessage','You are Logged In');
+//     req.flash('username',req.user.username);
+//     res.redirect('/admin/console');
+// });
+
+usersRouter.post('/login', function(req, res, next){
+  passport.authenticate('local', function(err, user, info){
+    if (err) {
+      req.flash('errors', err);
+      return res.redirect('/users/login');
+    }
+    if (!user) {
+      req.flash('errors', 'invalid user or password');
+      return res.redirect('/users/login');
+    }
+    req.logIn(user, function(err){
+      if (err) {
+        req.flash('errors', err.toString());
+        return res.redirect('/users/login');
+      }
+      req.flash('okMessage', 'You are now logged in');
+      req.flash('username', req.user.username);
+      return res.redirect('/admin/console');
+    });
+  })(req, res, next);
 });
 
 
