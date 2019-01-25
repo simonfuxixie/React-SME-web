@@ -1,33 +1,38 @@
 const express	=	require('express');
-const router =	express.Router();
+const usersRouter =	express.Router();
 const passport	=	require('passport');
 const path = require('path');
 const mongoose = require('mongoose');
 const { check, body, validationResult } = require('express-validator/check');
 const User = require('../models/users_model');
+const isAuthenticated = require('./isauthenticated');
 
 /* GET user home page. */
-router.get('/', function(req, res, next) {
- res.render('index', {title: 'WestApps user admin', okMessage: req.flash('okMessage'), });
+usersRouter.get('/', function(req, res, next) {
+  console.log('req.user: \n' + req.user, 'req.isAuthenticated(): ' + req.isAuthenticated())
+  res.render('index', {
+    title: 'WestApps',
+    okMessage: req.flash('okMessage'),
+    username: req.flash('username'),
+  });
 });
 
 // get register / sign up
-router.get('/register', function(req, res, next) {
+usersRouter.get('/register', function(req, res, next) {
   res.render('register', {
     registerForm: 'WestApps register form',
     errors: req.flash('errors'),
-    okMessage: req.flash('okMessage'),
     username: req.flash('username'),
     email: req.flash('email'),
   });
 });
 
 // post register
-router.post('/register', [
+usersRouter.post('/register', [
   check('email').isEmail(),
   check('password').isLength({min: 6}),
   check('confirmPassword').isLength({min: 6}),
-], (req, res) => {
+], (req, res, next) => {
   body('confirmPassword').custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error('Password confirmation does not match password');
@@ -60,9 +65,9 @@ router.post('/register', [
     console.log('registering user: \n', userInfo);
     User.register(new User(userInfo), userInfo.password)
       .then(result => {
-        req.flash('okMessage', 'user registered');
+        req.flash('okMessage', 'You are now registered');
         req.flash('username', result.username);
-        res.redirect('/admin/console');
+        res.redirect('/users');
       })
       .catch(err => {
         req.flash('errors',err.message);
@@ -74,42 +79,34 @@ router.post('/register', [
 });
 
 // user login and authentication
-router.get('/login', function(req, res, next) {
+usersRouter.get('/login', function(req, res, next) {
+  console.log('get login');
    res.render('login',{
-     user: req.user,
+     //user: req.user.username,
      loginForm: 'Login',
      errors: req.flash('errors'),
-     okMessage: req.flash('okMessage'),
    });
 });
 
 
-router.post('/login',
+usersRouter.post('/login',
   passport.authenticate('local', { failureRedirect: '/users/login', failureFlash:'Invalid Username or Password' }),
-  function(req, res) {
+  function(req, res, next) {
     //If Local Strategy Comes True
   	console.log('Authentication Successful');
-  	req.flash('okMessage','You are Logged In');
-    res.render('console', {user: req.user.username, });
+    req.flash('okMessage','You are Logged In');
+    req.flash('username',req.body.username);
+    res.redirect('/admin/console');    
 });
 
 
 // user logout
-router.get('/logout', function(req,res) {
+usersRouter.get('/logout', function(req,res,next) {
 	req.logout();
 	req.flash('okMessage','You have logged out');
-	res.redirect('/users');
+	res.redirect('/');
 });
 
-router.get('/ping', function(req, res){
-    res.status(200).send("pong!");
-});
 
-// to do
-//admin Console
-router.get('/admin/console', function(req, res){
-  let user = req.body.username;
-  res.render('console', {user: user});
-});
 
-module.exports = router;
+module.exports = usersRouter;

@@ -1,12 +1,16 @@
 var express = require('express');
-var router = express.Router();
+var apiRouter = express.Router();
 var app = express();
 //Import the mongoose module
 var mongoose = require('mongoose');
 
 const ContactMessage = require('../models/message_model');
 
-router.post('/messages', function(req, res){
+apiRouter.get('/messages', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+
+apiRouter.post('/messages', function(req, res){
   console.log(req.body);
   const contactInfo = req.body;
   const doc = new ContactMessage(contactInfo);
@@ -18,8 +22,6 @@ router.post('/messages', function(req, res){
   res.send("Contact info received, thanks! ");
 });
 
-app.get('/messages', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
 
-module.exports = router;
+
+module.exports = apiRouter;

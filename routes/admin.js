@@ -1,14 +1,15 @@
 var express	=	require('express');
-var router =	express.Router();
+var adminRouter =	express.Router();
 var mongoose = require('mongoose');
 const { check, body, validationResult } = require('express-validator/check');
 var Users =	require('../models/users_model');
-
+const isAuthenticated = require('./isauthenticated');
 
 /* GET user home page. */
-router.get('/console', function(req, res, next) {
+adminRouter.get('/console', isAuthenticated, function(req, res, next) {
  res.render('console', {
    title: 'WestApps console',
+   user: req.user.username,
    okMessage: req.flash('okMessage'),
    username: req.flash('username'),
  });
@@ -16,7 +17,7 @@ router.get('/console', function(req, res, next) {
 
 
 // user logout
-router.get('/logout', function(req,res) {
+adminRouter.get('/logout', function(req,res) {
 	req.logout();
 	req.flash('okMessage','You have logged out');
 	res.redirect('/');
@@ -24,4 +25,4 @@ router.get('/logout', function(req,res) {
 
 
 
-module.exports = router;
+module.exports = adminRouter;

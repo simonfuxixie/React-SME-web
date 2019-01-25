@@ -67,6 +67,9 @@ app.use(function(req,res,next) {
 });
 
 // passport config
+// Configure passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 var User = require('./models/users_model');
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
@@ -92,6 +95,16 @@ app.use(expressValidator({
 	}
 }));
 
+
+// routes
+const router = express.Router();
+// route middleware that will happen on every request
+router.use(function(req, res, next) {
+    // log each request to the console
+    console.log(req.method, req.url);
+    // continue doing what we were doing and go to the route
+    next();
+});
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, './client/build', 'index.html'));
@@ -119,13 +132,13 @@ app.get('/contact', (req,res) =>{
 });
 
 
-// routes
 var usersRouter	=	require('./routes/users');
 var adminRouter = require('./routes/admin');
 var apiRouter = require('./routes/api');
 app.use('/users',usersRouter);
 app.use('/admin',adminRouter);
 app.use('/api', apiRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
