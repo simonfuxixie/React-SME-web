@@ -1,6 +1,46 @@
-<script>
+<style>
+table {
+  table-layout: fixed;
+}
 
-</script>
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+</style>
 <!-- // to do :
 // console page, write/read full screen intro to mongodb, add logout button
 // in react component, read screen intro from mongodb, CRUD
@@ -40,32 +80,31 @@
       </div>
     </div>
   </div>
-  <section class="features14 cid-rdGSvMnXrN" id="features14-j">
-    <div class="container align-center">
-      <h3><a class="btn btn-secondary" href="/admin/navbaritems"><i class="fa fa-plus"></i> Create New</a> Navbar Items List</h3>
-      <table class="table table-striped">
-          <thead>
-              <tr>
-                  <th>Nav Item name</th>
-                  <th>Nav Item URL</th>
-                  <th>Nav Subitem</th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              {{#each list}}
-              <tr>
-                  <td>{{this.nav_item_name}}</td>
-                  <td>{{this.nav_item_url}}</td>
-                  <td>{{this.nav_subitem}}</td>
-                  <td>
-                      <a href="/admin/navbaritems/{{this._id}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                      <a href="/admin/navbaritems/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-                  </td>
-              </tr>
-              {{/each}}
-          </tbody>
+  <div class="container align-center">
+    <form class="mbr-form" action="/navbaritems" method="POST" autocomplete="off">
+      <label class="form-control-label mbr-fonts-style display-7">Nav Subitem</label>
+      <input type="button" value="Add" class="list_add">
+      <table id="list_nav_subitem" class="table">
+        <thead>
+          <tr><th>Name</th><th>Mail</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr class="list_var">
+            <td><input type="text" name="list-name_0"></td>
+            <td><input type="text" name="list-mail_0"></td>
+            <td class="del-area"><button class="list_del">Delete</button></td>
+          </tr>
+        </tbody>
       </table>
-    </div>
-  </section>
+    </form>
+  </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.add-input-area@4.11.0/dist/jquery.add-input-area.min.js"></script>
+<script>
+  $(function() {
+    $('#list_nav_subitem').addInputArea({
+      area_del: '.del-area'
+    });
+  });
+</script>

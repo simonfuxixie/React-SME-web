@@ -14,7 +14,15 @@ const createError = require('http-errors'),
 const LocalStrategy	=	require('passport-local').Strategy;
 const exphbs = require('express-handlebars');
 const hbsFormHelper = require('handlebars-form-helper');
+const Handlebars = require('handlebars');
+const HandlebarsIntl = require('handlebars-intl');
 
+Handlebars.registerHelper('assign', function (varName, varValue, options) {
+    if (!options.data.root) {
+        options.data.root = {};
+    }
+    options.data.root[varName] = varValue;
+});
 
 var app = express();
 

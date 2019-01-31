@@ -9,7 +9,7 @@ const isAuthenticated = require('./isauthenticated');
 
 /* GET user home page. */
 usersRouter.get('/', function(req, res, next) {
-  console.log('req.user: \n' + req.user, 'req.isAuthenticated(): ' + req.isAuthenticated())
+  // console.log('req.user: \n' + req.user, 'req.isAuthenticated(): ' + req.isAuthenticated())
   res.render('index', {
     title: 'WestApps',
     okMessage: req.flash('okMessage'),

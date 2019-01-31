@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 const { check, body, validationResult } = require('express-validator/check');
 var Users =	require('../models/users_model');
 const isAuthenticated = require('./isauthenticated');
+const navbaritemsRouter = require('./navbaritems_router');
+
+adminRouter.use('/navbaritems', navbaritemsRouter);
 
 /* GET user home page. */
 adminRouter.get('/console', isAuthenticated, function(req, res, next) {
