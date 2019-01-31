@@ -20,50 +20,106 @@ navbaritemsRouter.post('/', (req, res) => {
     }
 });
 
-// view subitems
-navbaritemsRouter.get('/subitems', (req, res) => {
-    res.render("navbaritems/add_or_edit", {
-        title: "Insert NavbarItems"
+navbaritemsRouter.get('/list', (req, res) => {
+    NavbarItems.find((err, recordes) => {
+        if (!err) {
+            res.render("navbaritems/navbaritems_list", {
+              errors: req.flash('errors'),
+              list: recordes,
+            });
+        }
+        else {
+            console.log('Error in retrieving navbaritems list :' + err);
+            res.render("navbaritems/navbaritems_list", {
+                errors: [err.name, err.message],
+            });
+        }
     });
 });
-// update subitems
-navbaritemsRouter.post('/subitems', (req, res) => {
-  if (req.body._id == '') {
-    insertRecord(req, res);
-    } else {
-      updateRecord(req, res);
-    }
+
+
+navbaritemsRouter.get('/:id', (req, res) => {
+    NavbarItems.findById(req.params.id, (err, doc) => {
+      // console.log(doc.nav_subitem[0]);
+      if (!err) {
+        res.render("navbaritems/add_or_edit", {
+            title: "Update NavbarItems",
+            navbaritems: doc,
+        });
+      }
+      else {
+        res.render("navbaritems/navbaritems_list", {
+            errors: [err.name, err.message],
+        });
+      }
+    });
 });
 
+navbaritemsRouter.get('/delete/:id', (req, res) => {
+  NavbarItems.findByIdAndRemove(req.params.id, (err, doc) => {
+    if (!err) {
+      res.redirect('/admin/navbaritems/list');
+    }
+    else {
+      res.render("navbaritems/navbaritems_list", {
+          errors: [err.name, err.message],
+      });
+    }
+  });
+});
 
-function insertRecord(req, res) {
+navbaritemsRouter.get('/subitems/delete/:parentid/:subdocid',
+  async (req, res) => {
+    deleteSubitem(req, res);
+});
 
-    let reqBody = req.body;
-    console.log(reqBody);
-    let nav_subitem_list = [];
+// navbaritemsRouter.get('/subitems/:id', (req, res) => {
+//     NavbarItems.findById(req.params.id, (err, doc) => {
+//       // console.log(doc.nav_subitem[0]);
+//       if (!err) {
+//         res.render("navbaritems/add_or_edit", {
+//             title: "Update NavbarItems",
+//             navbaritems: doc,
+//         });
+//       }
+//       else {
+//         console.log(err);
+//       }
+//     });
+// });
 
-    for (let key in reqBody) {
-      if (key.includes('nav_subitem_name_')) {
-        let subi = {};
-        let key2 = `nav_subitem_url_${key.slice(-1)}`;
-        // console.log(key2);
+
+function getBodyInfo (req, res) {
+  let reqBody = req.body;
+  let nav_subitem_list = [];
+  for (let key in reqBody) {
+    if (key.includes('nav_subitem_name_')) {
+      let subi = {};
+      let key2 = `nav_subitem_url_${key.slice(-1)}`;
+      // console.log(key2);
+      if (req.body[key] && req.body[key2]) {
         subi.name  = req.body[key];
         subi.url  = req.body[key2];
         nav_subitem_list.push(subi);
-        // console.log(nav_subitem_list);
       }
       else {
         continue;
       }
     }
-
-    let navbaritemsInfo = {
-      nav_item_name: req.body.nav_item_name,
-      nav_item_url: req.body.nav_item_url,
-      nav_subitem: nav_subitem_list,
+    else {
+      continue;
     }
+  }
+  let navbaritemsInfo = {
+    nav_item_name: req.body.nav_item_name,
+    nav_item_url: req.body.nav_item_url,
+    nav_subitem: nav_subitem_list,
+  }
+  return navbaritemsInfo;
+}
 
-    // console.log(navbaritemsInfo);
+function insertRecord(req, res) {
+    let navbaritemsInfo = getBodyInfo(req, res);
     const navbaritems = new NavbarItems(navbaritemsInfo);
     navbaritems.save((err, doc) => {
         if (!err) {
@@ -90,35 +146,10 @@ function insertRecord(req, res) {
 }
 
 function updateRecord(req, res) {
-
-    let reqBody = req.body;
-    console.log(reqBody);
-    let nav_subitem_list = [];
-
-    for (let key in reqBody) {
-      if (key.includes('nav_subitem_name_')) {
-        let subi = {};
-        let key2 = `nav_subitem_url_${key.slice(-1)}`;
-        // console.log(key2);
-        subi.name  = req.body[key];
-        subi.url  = req.body[key2];
-        nav_subitem_list.push(subi);
-        // console.log(nav_subitem_list);
-      }
-      else {
-        continue;
-      }
-    }
-
-    let newInfo = {
-      nav_item_name: req.body.nav_item_name,
-      nav_item_url: req.body.nav_item_url,
-      nav_subitem: nav_subitem_list,
-    }
-
+    let updatedInfo = getBodyInfo(req, res);
     NavbarItems.findOneAndUpdate(
       { _id: req.body._id },
-      newInfo,
+      updatedInfo,
       { new: true },
       (err, doc) => {
         if (!err) { res.redirect('navbaritems/list'); }
@@ -128,7 +159,7 @@ function updateRecord(req, res) {
                 res.render("navbaritems/add_or_edit", {
                     title: 'Update NavbarItems',
                     navbaritems: req.body,
-                    errors: JSON.stringify(err),
+                    errors: [err.name, err.message],
                 });
             }
             else {
@@ -136,90 +167,12 @@ function updateRecord(req, res) {
               res.render("navbaritems/add_or_edit", {
                   title: 'Update NavbarItems',
                   navbaritems: req.body,
-                  errors: JSON.stringify(err),
+                  errors: [err.name, err.message],
               });
             }
         }
     });
 }
-
-
-navbaritemsRouter.get('/list', (req, res) => {
-    NavbarItems.find((err, recordes) => {
-        if (!err) {
-            res.render("navbaritems/navbaritems_list", {
-              errors: req.flash('errors'),
-              list: recordes,
-            });
-        }
-        else {
-            console.log('Error in retrieving navbaritems list :' + err);
-            res.render("navbaritems/navbaritems_list", {
-                errors: JSON.stringify(err),
-            });
-        }
-    });
-});
-
-
-function handleValidationError(err, body) {
-    for (field in err.errors) {
-        switch (err.errors[field].path) {
-            case 'nav_item_name':
-                body['nav_item_name_error'] = err.errors[field].message;
-                break;
-            case 'nav_item_url':
-                body['nav_item_url_error'] = err.errors[field].message;
-                break;
-            default:
-                break;
-        }
-    }
-}
-
-navbaritemsRouter.get('/:id', (req, res) => {
-    NavbarItems.findById(req.params.id, (err, doc) => {
-      // console.log(doc.nav_subitem[0]);
-      if (!err) {
-        res.render("navbaritems/add_or_edit", {
-            title: "Update NavbarItems",
-            navbaritems: doc,
-        });
-      }
-      else {
-        console.log(err);
-      }
-    });
-});
-
-navbaritemsRouter.get('/delete/:id', (req, res) => {
-    NavbarItems.findByIdAndRemove(req.params.id, (err, doc) => {
-        if (!err) {
-            res.redirect('/admin/navbaritems/list');
-        }
-        else { console.log('Error in navbaritems delete :' + err); }
-    });
-});
-
-navbaritemsRouter.get('/subitems/:id', (req, res) => {
-    NavbarItems.findById(req.params.id, (err, doc) => {
-      // console.log(doc.nav_subitem[0]);
-      if (!err) {
-        res.render("navbaritems/add_or_edit", {
-            title: "Update NavbarItems",
-            navbaritems: doc,
-        });
-      }
-      else {
-        console.log(err);
-      }
-    });
-});
-
-navbaritemsRouter.get('/subitems/delete/:parentid/:subdocid',
-  async (req, res) => {    
-    deleteSubitem(req, res);
-});
 
 async function deleteSubitem (req, res) {
   try {
@@ -253,6 +206,21 @@ async function deleteSubitem (req, res) {
       req.flash('errors', [err.name, err.message]);
       res.redirect('/admin/navbaritems/list');
   }
+}
+
+function handleValidationError(err, body) {
+    for (field in err.errors) {
+        switch (err.errors[field].path) {
+            case 'nav_item_name':
+                body['nav_item_name_error'] = err.errors[field].message;
+                break;
+            case 'nav_item_url':
+                body['nav_item_url_error'] = err.errors[field].message;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 module.exports = navbaritemsRouter;
