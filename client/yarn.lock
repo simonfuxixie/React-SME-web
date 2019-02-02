@@ -7920,6 +7920,11 @@ react-error-overlay@^5.1.1:
   resolved "http://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-5.1.1.tgz#56f0439f001ff3588da0f479a86482ccb1e708cb"
   integrity sha1-VvBDnwAf81iNoPR5qGSCzLHnCMs=
 
+react-loading@^2.0.3:
+  version "2.0.3"
+  resolved "http://registry.npm.taobao.org/react-loading/download/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
+  integrity sha1-6BOPsMPkZ05IGzIIAqxwSK4U/7k=
+
 react-router-dom@^4.3.1:
   version "4.3.1"
   resolved "http://registry.npm.taobao.org/react-router-dom/download/react-router-dom-4.3.1.tgz#4c2619fc24c4fa87c9fd18f4fb4a43fe63fbd5c6"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import components
+import ReactLoading from 'react-loading';
 import Hamburger from "./hamburger";
 import MenuLogo from "./menu_logo";
 import NavbarButton from "./navbar_button";
@@ -39,7 +40,11 @@ class Navbar extends Component {
             <MenuLogo url= {URL} logo={LOGO_URL} name="WestApps" />
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
-                {this.createNavbarItems()}
+                {
+                  this.props.data ?
+                  this.createNavbarItems() :
+                  <ReactLoading />
+                }
               </ul>
               <NavbarButton url={CONTACT_URL}/>
             </div>

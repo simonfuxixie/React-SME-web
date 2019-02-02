@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 // import components
 import Navbar from "../components/navbar.js";
 import FullScreenIntro from "../components/full_screen_intro";
@@ -10,7 +12,7 @@ import SectionClients from "../components/section_clients";
 import ContactForm from "../components/section_contact_form";
 import SectionFooter from "../components/section_footer";
 // import data
-import { NavbarItems } from "../data/json_data.js";
+// import { NavbarItems } from "../data/json_data.js";
 import {FullScreenIntroData} from "../data/json_data.js";
 import {TextOnImgData} from "../data/json_data.js";
 import {ImgBelowContentData} from "../data/json_data.js";
@@ -21,10 +23,36 @@ import {SocItemData} from "../data/json_data.js";
 import {FooterMenuData} from "../data/json_data.js";
 // create component
 class ViewHome extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      navbarItems:[],
+    }
+  }
+
+  async componentDidMount(){
+    let data = await this.getData('/frontenddata?target=navbaritems');
+    this.setState({
+      navbarItems: data,
+    });
+
+  }
+
+  async getData(dataTarget){
+    try {
+      const response = await axios.get(dataTarget);
+      let data = response.data;
+      return data;
+    } catch(err){
+      console.error(err);
+    }
+  }
+
+
   render() {
     return (
       <div>
-        <Navbar data={NavbarItems}/>
+        <Navbar data={this.state.navbarItems}/>
         <FullScreenIntro data={FullScreenIntroData}/>
         <Section2Col2Img data={TextOnImgData}/>
         <Section2Col1Img data={ImgBelowContentData}/>

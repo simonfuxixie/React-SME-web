@@ -140,12 +140,14 @@ app.get('/contact', (req,res) =>{
 });
 
 
-var usersRouter	=	require('./routes/users');
-var adminRouter = require('./routes/admin');
-var apiRouter = require('./routes/api');
+const usersRouter	=	require('./routes/users');
+const adminRouter = require('./routes/admin');
+const apiRouter = require('./routes/api');
+const frontendRouter = require('./routes/frontend_router');
 app.use('/users',usersRouter);
 app.use('/admin',adminRouter);
 app.use('/api', apiRouter);
+app.use('/frontenddata', frontendRouter);
 
 
 // catch 404 and forward to error handler

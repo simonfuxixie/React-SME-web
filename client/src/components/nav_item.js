@@ -25,7 +25,7 @@ class NavItem extends Component {
 
   render(){
     return (
-      <li className="nav-item dropdown open">
+      <li className="nav-item dropdown ">
         <a className="nav-link link text-black dropdown-toggle display-4"
           href={this.props.info.nav_item_url}
           data-toggle="dropdown-submenu"
