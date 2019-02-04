@@ -12,6 +12,10 @@ import "../assets/gallery/style.css";
 import "../assets/mobirise/css/mbr-additional.css";
 
 class FullScreenIntro extends Component {
+  constructor(props){
+    super(props);    
+  }
+
 
   render(){
     return (

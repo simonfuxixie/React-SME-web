@@ -16,9 +16,10 @@ import "../assets/mobirise/css/mbr-additional.css";
 class SectionCountersMedia extends Component {
 
   createCards = () => {
-    let cardsList = [];
-    for (let i = 0; i < this.props.data.card.length; i ++) {
-      cardsList.push(<CardCountersMedia card_info={this.props.data.card[i]} key={i}/>);
+    const cardsList = [];
+    const data = this.props.data.card;
+    for (let [index, value] of data.entries()) {
+      cardsList.push(<CardCountersMedia card_info={value} key={index}/>);
     }
     return cardsList;
   }

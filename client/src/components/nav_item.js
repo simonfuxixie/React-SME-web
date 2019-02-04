@@ -15,10 +15,10 @@ import "../assets/mobirise/css/mbr-additional.css";
 class NavItem extends Component {
 
   createDropdownItem = () => {
-    let items = this.props.info.nav_subitem;
-    let listItems = [];
-    for (let i=0; i< items.length; i++) {
-      listItems.push(<MenuDropdownItem url={items[i].url} content={items[i].name} key={items[i].name}/>);
+    const items = this.props.info.nav_subitems;
+    const listItems = [];
+    for (let [index, value] of items.entries()) {
+      listItems.push(<MenuDropdownItem url={value.url} content={value.name} key={value.name}/>);
     }
     return listItems;
   }

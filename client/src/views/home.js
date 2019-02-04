@@ -13,7 +13,7 @@ import ContactForm from "../components/section_contact_form";
 import SectionFooter from "../components/section_footer";
 // import data
 // import { NavbarItems } from "../data/json_data.js";
-import {FullScreenIntroData} from "../data/json_data.js";
+// import {FullScreenIntroData} from "../data/json_data.js";
 import {TextOnImgData} from "../data/json_data.js";
 import {ImgBelowContentData} from "../data/json_data.js";
 import {CountersAndMediaData} from "../data/json_data.js";
@@ -26,14 +26,19 @@ class ViewHome extends Component {
   constructor(props){
     super(props);
     this.state = {
-      navbarItems:[],
+      navbarItems: [],
+      fullscreenintro: [],
     }
   }
 
   async componentDidMount(){
-    let data = await this.getData('/frontenddata?target=navbaritems');
+    const data = await this.getData('/frontenddata?target=navbaritems');
     this.setState({
       navbarItems: data,
+    });
+    const data1 = await this.getData('/frontenddata?target=fullscreenintro');
+    this.setState({
+      fullscreenintro: data1,
     });
 
   }
@@ -41,7 +46,8 @@ class ViewHome extends Component {
   async getData(dataTarget){
     try {
       const response = await axios.get(dataTarget);
-      let data = response.data;
+      const data = response.data;
+      console.log(data);
       return data;
     } catch(err){
       console.error(err);
@@ -53,7 +59,7 @@ class ViewHome extends Component {
     return (
       <div>
         <Navbar data={this.state.navbarItems}/>
-        <FullScreenIntro data={FullScreenIntroData}/>
+        <FullScreenIntro data={this.state.fullscreenintro}/>
         <Section2Col2Img data={TextOnImgData}/>
         <Section2Col1Img data={ImgBelowContentData}/>
         <SectionCountersMedia data={CountersAndMediaData}/>

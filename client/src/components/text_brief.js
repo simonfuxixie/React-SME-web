@@ -14,7 +14,7 @@ import "../assets/mobirise/css/mbr-additional.css";
 export default class TextBrief extends Component {
 
   createTextList = () => {
-    let textList = [];
+    const textList = [];
     for (let i = 0; i < this.props.text.length; i ++) {
       textList.push(<li style={{marginTop:"15px",}} key={this.props.text[i].subtitle}><strong>{this.props.text[i].subtitle}</strong> - {this.props.text[i].content}</li>);
     }

@@ -16,16 +16,17 @@ import "../assets/mobirise/css/mbr-additional.css";
 class SectionFooter extends Component {
 
   createSocItem = () => {
-    let socItemList = [];
-    for (let i = 0; i < this.props.data.length; i ++) {
-      socItemList.push(<SocItem href={this.props.data[i].href} class={this.props.data[i].class} key={i}/>);
+    const socItemList = [];
+    const data = this.props.data;
+    for (let [index, value] of data.entries()) {
+      socItemList.push(<SocItem href={value.href} class={value.class} key={index}/>);
     }
     return socItemList;
   }
 
   createMenu = () => {
-    let menu = this.props.footer_menu;
-    let menuList = menu.map((item) =>
+    const menu = this.props.footer_menu;
+    const menuList = menu.map((item) =>
     <a href={item.href}
        className="text-black"
        key={item.menu_item}

@@ -39,11 +39,11 @@ class SignupForm extends Component {
       });
   }
 
-  getDateTime(){
-    let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date+' '+time;
+  getDateTime = () => {
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date+' '+time;
     return dateTime;
   }
 
@@ -76,7 +76,7 @@ class SignupForm extends Component {
         // Something happened in setting up the request that triggered an Error
         console.log('Error', error.message);
       }
-      console.log(error.config);
+      // console.log(error.config);
     })
     .then((res) => {
       console.log('Response:', res);
@@ -87,9 +87,10 @@ class SignupForm extends Component {
         });
       }
       if (res.data.errors.length > 0) {
-        let formErrList = [];
-        for (let i = 0; i < res.data.errors.length; i ++){
-          formErrList.push(<li>{res.data.errors[i].param} : {res.data.errors[i].msg} </li>);
+        const formErrList = [];
+        const data = res.data.errors;
+        for (let [index, value] of data.entries()) {
+          formErrList.push(<li>{value.param} : {value.msg} </li>);
         }
         this.setState({
           errorMessages: formErrList,

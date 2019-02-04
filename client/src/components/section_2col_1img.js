@@ -16,9 +16,10 @@ import "../assets/mobirise/css/mbr-additional.css";
 class Section2Col1Img extends Component {
 
   createCardText = () => {
-    let cardTextList = [];
-    for (let i = 0; i< this.props.data.card.length; i ++) {
-      cardTextList.push(<CardText card_info={this.props.data.card[i]} key={i}/>);
+    const cardTextList = [];
+    const data = this.props.data.card;
+    for (let [index, value] of data.entries()) {
+      cardTextList.push(<CardText card_info={value} key={index}/>);
     }
     return cardTextList;
   }

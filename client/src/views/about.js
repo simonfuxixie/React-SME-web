@@ -26,10 +26,10 @@ export default class ViewAbout extends Component {
 
   }
 
-  async getData(dataTarget){
+  getData = async (dataTarget) => {
     try {
       const response = await axios.get(dataTarget);
-      let data = response.data;
+      const data = response.data;
       return data;
     } catch(err){
       console.error(err);
