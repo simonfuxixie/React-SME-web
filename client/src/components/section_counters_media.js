@@ -18,8 +18,10 @@ class SectionCountersMedia extends Component {
   createCards = () => {
     const cardsList = [];
     const data = this.props.data.card;
-    for (let [index, value] of data.entries()) {
-      cardsList.push(<CardCountersMedia card_info={value} key={index}/>);
+    let i = 0;
+    for (let value of data) {
+      cardsList.push(<CardCountersMedia card_info={value} key={i}/>);
+      i ++;
     }
     return cardsList;
   }

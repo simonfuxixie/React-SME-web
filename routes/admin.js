@@ -1,12 +1,15 @@
-var express	=	require('express');
-var adminRouter =	express.Router();
-var mongoose = require('mongoose');
+'use strict';
+const express	=	require('express');
+const adminRouter =	express.Router();
+const mongoose = require('mongoose');
 const { check, body, validationResult } = require('express-validator/check');
-var Users =	require('../models/users_model');
+const Users =	require('../models/users_model');
 const isAuthenticated = require('./isauthenticated');
 const navbaritemsRouter = require('./navbaritems_router');
+const fullscreenintroRouter = require('./fullscreenintro_router');
 
 adminRouter.use('/navbaritems', navbaritemsRouter);
+adminRouter.use('/fullscreenintro', fullscreenintroRouter);
 
 /* GET user home page. */
 adminRouter.get('/console', isAuthenticated, function(req, res, next) {

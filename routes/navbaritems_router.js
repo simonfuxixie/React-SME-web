@@ -73,21 +73,6 @@ navbaritemsRouter.get('/subitems/delete/:parentid/:subdocid',
     deleteSubitem(req, res);
 });
 
-// navbaritemsRouter.get('/subitems/:id', (req, res) => {
-//     NavbarItems.findById(req.params.id, (err, doc) => {
-//       // console.log(doc.nav_subitem[0]);
-//       if (!err) {
-//         res.render("navbaritems/add_or_edit", {
-//             title: "Update NavbarItems",
-//             navbaritems: doc,
-//         });
-//       }
-//       else {
-//         console.log(err);
-//       }
-//     });
-// });
-
 
 function getBodyInfo (req, res) {
   let reqBody = req.body;

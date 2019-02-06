@@ -68,7 +68,9 @@ ul, #myUL {
     <div class="container">
       <div class="row">
         <div class="col">Navbar</div>
-        <div class="col">Full screen intro</div>
+        <div class="col">
+          <a href="/admin/fullscreenintro/list">Full screen intro</a> 
+        </div>
         <div class="col">col</div>
         <div class="col">col</div>
       </div>
@@ -110,7 +112,7 @@ ul, #myUL {
                           <li style="padding-left:40px; width: 400px;">{{this.url}}</li>
                           <li style="padding-left:40px; width: 400px;">{{this.name}}</li>
                           <li style="padding-left:40px; width: 400px;">
-                            <span style="padding-left: 200px;">                              
+                            <span style="padding-left: 200px;">
                               <a href="/admin/navbaritems/subitems/delete/{{@root.parentId}}/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
                             </span>
                           </li>

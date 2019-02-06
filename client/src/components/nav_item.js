@@ -17,7 +17,7 @@ class NavItem extends Component {
   createDropdownItem = () => {
     const items = this.props.info.nav_subitems;
     const listItems = [];
-    for (let [index, value] of items.entries()) {
+    for (let value of items) {
       listItems.push(<MenuDropdownItem url={value.url} content={value.name} key={value.name}/>);
     }
     return listItems;

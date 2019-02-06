@@ -13,27 +13,32 @@ import "../assets/theme/css/style.css";
 import "../assets/gallery/style.css";
 import "../assets/mobirise/css/mbr-additional.css";
 
+const Copy_Right = "© Copyright WestApps - All Rights Reserved";
+
 class SectionFooter extends Component {
 
   createSocItem = () => {
-    const socItemList = [];
     const data = this.props.data;
-    for (let [index, value] of data.entries()) {
-      socItemList.push(<SocItem href={value.href} class={value.class} key={index}/>);
-    }
+    const socItemList = data.map((item, index) =>
+      <SocItem
+        href={item.href}
+        class={item.class}
+        key={index}/>
+    );
     return socItemList;
   }
 
   createMenu = () => {
     const menu = this.props.footer_menu;
     const menuList = menu.map((item) =>
-    <a href={item.href}
-       className="text-black"
-       key={item.menu_item}
-       style={{paddingLeft:"20px"}}>
-       {item.menu_item}
-     </a>);
-     return menuList;
+      <a href={item.href}
+         className="text-black"
+         key={item.menu_item}
+         style={{paddingLeft:"20px"}}>
+         {item.menu_item}
+       </a>
+     );
+    return menuList;
   }
 
   render(){
@@ -63,7 +68,7 @@ class SectionFooter extends Component {
             <div className="media-container-row mbr-white">
               <div className="col-md-6 copyright">
                 <p className="mbr-text mbr-fonts-style display-7">
-                  © Copyright WestApps - All Rights Reserved
+                  {Copy_Right}
                 </p>
               </div>
               <div className="col-md-6">

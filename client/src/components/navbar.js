@@ -24,10 +24,11 @@ let LOGO_URL = "../assets/images/logo2.png";
 class Navbar extends Component {
 
   createNavbarItems = () => {
-    let navbarItemsList = [];
-    for (let i = 0; i < this.props.data.length; i ++ ) {
-      navbarItemsList.push(<NavItem info={this.props.data[i]} key={this.props.data[i].nav_item_name}/>);
-    }
+    const data = this.props.data;
+    const navbarItemsList = [];    
+    data.forEach( (value) => {
+      navbarItemsList.push(<NavItem info={value} key={value.nav_item_name}/>);
+    });
     return navbarItemsList;
   }
 

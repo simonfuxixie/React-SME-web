@@ -21,6 +21,7 @@ export default class TextBrief extends Component {
     return textList;
   }
 
+
   render () {
     return (
       <section

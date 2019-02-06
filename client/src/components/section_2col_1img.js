@@ -18,8 +18,10 @@ class Section2Col1Img extends Component {
   createCardText = () => {
     const cardTextList = [];
     const data = this.props.data.card;
-    for (let [index, value] of data.entries()) {
-      cardTextList.push(<CardText card_info={value} key={index}/>);
+    let i = 0;
+    for (let value of data) {
+      cardTextList.push(<CardText card_info={value} key={i}/>);
+      i ++;
     }
     return cardTextList;
   }
