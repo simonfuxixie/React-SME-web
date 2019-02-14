@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import MenuDropdownItem from "./menu_dropdown_item";
 
 import "../assets/web/assets/mobirise-icons/mobirise-icons.css";
@@ -18,7 +19,14 @@ class NavItem extends Component {
     const items = this.props.info.nav_subitems;
     const listItems = [];
     for (let value of items) {
-      listItems.push(<MenuDropdownItem url={value.url} content={value.name} key={value.name}/>);
+      listItems.push(
+        <a className="text-black dropdown-item display-4"
+          href={value.url}
+          aria-expanded="false"
+        >
+          {value.name}
+        </a>);
+      // listItems.push(<MenuDropdownItem url={value.url} content={value.name} key={value.name}/>);
     }
     return listItems;
   }

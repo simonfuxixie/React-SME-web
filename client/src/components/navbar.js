@@ -17,15 +17,15 @@ import "../assets/theme/css/style.css";
 import "../assets/gallery/style.css";
 import "../assets/mobirise/css/mbr-additional.css";
 // constant
-let URL = "/";
-let CONTACT_URL = "/#form1-m";
-let LOGO_URL = "../assets/images/logo2.png";
+const URL = "/";
+const CONTACT_URL = "/#form1-m";
+const WestAppsLogo = "../assets/images/logo2.png";
 // component
 class Navbar extends Component {
 
   createNavbarItems = () => {
     const data = this.props.data;
-    const navbarItemsList = [];    
+    const navbarItemsList = [];
     data.forEach( (value) => {
       navbarItemsList.push(<NavItem info={value} key={value.nav_item_name}/>);
     });
@@ -35,10 +35,12 @@ class Navbar extends Component {
 
   render() {
     return (
-      <section className="menu cid-rdAxkJxqpX" id="menu2-9" >
+      <section className="menu cid-rdAxkJxqpX" id="menu2-9"
+        style={{margin:'10px', padding:'10px', backgroundColor:"transparent", }}
+      >
           <nav style={this.props.style} className="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
             <Hamburger />
-            <MenuLogo url= {URL} logo={LOGO_URL} name="WestApps" />
+            <MenuLogo url= {URL} logo={WestAppsLogo} name="WestApps" />
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
                 {

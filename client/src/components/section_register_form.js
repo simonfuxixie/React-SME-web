@@ -89,7 +89,7 @@ class SignupForm extends Component {
       if (res.data.errors.length > 0) {
         const formErrList = [];
         const data = res.data.errors;
-        for (let [index, value] of data.entries()) {
+        for (let value of data) {
           formErrList.push(<li>{value.param} : {value.msg} </li>);
         }
         this.setState({

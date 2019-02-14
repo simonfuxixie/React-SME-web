@@ -13,9 +13,9 @@ import "../assets/gallery/style.css";
 import "../assets/mobirise/css/mbr-additional.css";
 
 class FullScreenIntro extends Component {
-  constructor(props){
-    super(props);
-  }
+  // constructor(props){
+  //   super(props);
+  // }
 
   displayData = (op) =>  {
     const data = this.props.data;
@@ -34,7 +34,7 @@ class FullScreenIntro extends Component {
     const title = 'title';
     const content = 'content';
     return (
-      <section className="cid-rdFUiroViD mbr-parallax-background" id="header2-f">
+      <section className="cid-rdFUiroViD mbr-parallax-background" id="header2-f" style={{zIndex: 0, display: 'block', margin: '2px', padding: '100px', position: 'relative', top:'80px',}}>
         <div className="mbr-overlay" style={{opacity: 0.6, backgroundColor: "rgb(118, 118, 118)",}}></div>
         <div className="container align-center">
           <div className="row justify-content-md-center">

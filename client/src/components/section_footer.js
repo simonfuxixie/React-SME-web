@@ -14,6 +14,7 @@ import "../assets/gallery/style.css";
 import "../assets/mobirise/css/mbr-additional.css";
 
 const Copy_Right = "© Copyright WestApps - All Rights Reserved";
+const WestAppsLogo ='../assets/images/westapps_logo.png';
 
 class SectionFooter extends Component {
 
@@ -49,7 +50,7 @@ class SectionFooter extends Component {
             <div className="col-md-3">
               <div className="media-wrap">
                 <a href="/">
-                  <img src="/assets/images/logo2.png" alt="WestApps"/>
+                  <img src={WestAppsLogo} alt="WestApps"/>
                 </a>
               </div>
             </div>

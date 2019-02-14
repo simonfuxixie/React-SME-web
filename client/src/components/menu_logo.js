@@ -22,7 +22,7 @@ class MenuLogo extends Component {
           </span>
           <span className="navbar-caption-wrap">
             <a className="navbar-caption text-black display-4" href={this.props.url}>
-              {this.props.name}
+              {}
             </a>
           </span>
         </div>

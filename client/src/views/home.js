@@ -14,8 +14,10 @@ import SectionFooter from "../components/section_footer";
 // import data
 // import { NavbarItems } from "../data/json_data.js";
 // import {FullScreenIntroData} from "../data/json_data.js";
-import {TextOnImgData} from "../data/json_data.js";
-import {ImgBelowContentData} from "../data/json_data.js";
+import {DataServicesData} from "../data/json_data.js";
+// import {TextOnImgData} from "../data/json_data.js";
+import {ECommerceData} from "../data/json_data.js";
+// import {ImgBelowContentData} from "../data/json_data.js";
 import {CountersAndMediaData} from "../data/json_data.js";
 import {ImgButtonsOnData} from "../data/json_data.js";
 import {ClientCarouselData} from "../data/json_data.js";
@@ -26,16 +28,11 @@ class ViewHome extends Component {
   constructor(props){
     super(props);
     this.state = {
-      navbarItems: [],
       fullscreenintro: [],
     }
   }
 
   async componentDidMount(){
-    const data = await this.getData('/frontenddata?target=navbaritems');
-    this.setState({
-      navbarItems: data,
-    });
     const data1 = await this.getData('/frontenddata?target=fullscreenintro');
     this.setState({
       fullscreenintro: data1,
@@ -58,15 +55,13 @@ class ViewHome extends Component {
   render() {
     return (
       <div>
-        <Navbar data={this.state.navbarItems}/>
         <FullScreenIntro data={this.state.fullscreenintro}/>
-        <Section2Col2Img data={TextOnImgData}/>
-        <Section2Col1Img data={ImgBelowContentData}/>
+        <Section2Col2Img data={DataServicesData}/>
+        <Section2Col1Img data={ECommerceData}/>
         <SectionCountersMedia data={CountersAndMediaData}/>
         <SectionImgButtonOn data={ImgButtonsOnData}/>
         <SectionClients data={ClientCarouselData}/>
         <ContactForm />
-        <SectionFooter data={SocItemData} footer_menu={FooterMenuData}/>
       </div>
     );
   }

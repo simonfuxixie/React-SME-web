@@ -60,7 +60,7 @@ class ContactForm extends Component {
     const {name, email, phone, message, time, } = this.state;
     axios.post("/api/messages", {name, email, phone, message, time,})
     .then((res) => this.setState({responseMessage: `${res.data}`,}))
-    .catch((err) => console.log(err) );
+    .catch((err) => this.setState({responseMessage: `${err.message}`,}) );
   }
 
 
@@ -75,7 +75,7 @@ class ContactForm extends Component {
                 CONTACT FORM
               </h2>
               <h3 className="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
-                Easily add subscribe and contact forms without any server-side integration.
+                Easily fill in the following form and we will get back to you soon.
               </h3>
             </div>
           </div>

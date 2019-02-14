@@ -22,12 +22,14 @@ export default class TextBrief extends Component {
   }
 
 
+
+
   render () {
     return (
-      <section
+      <section style={{display:'block', margin:'20px', padding:'5px', position:'relative', top: '50px', backgroundColor:"transparent", }}
         className="mbr-section article content12 cid-rerKVvER1E"
         id="content12-q"
-        style={{backgroundColor:"transparent", marginTop:"35px",}}>
+      >
         <div className="container">
           <div className="media-container-row">
             <div className="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">

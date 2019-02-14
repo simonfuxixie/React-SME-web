@@ -11,38 +11,10 @@ import {SocItemData} from "../data/json_data.js";
 import {FooterMenuData} from "../data/json_data.js";
 
 export default class ViewAbout extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      navbarItems:[],
-    }
-  }
-
-  async componentDidMount(){
-    let data = await this.getData('/frontenddata?target=navbaritems');
-    this.setState({
-      navbarItems: data,
-    });
-
-  }
-
-  getData = async (dataTarget) => {
-    try {
-      const response = await axios.get(dataTarget);
-      const data = response.data;
-      return data;
-    } catch(err){
-      console.error(err);
-    }
-  }
 
   render () {
     return (
-      <div>
-        <Navbar style={{position:"relative"}} data={this.state.navbarItems}/>
-        <TextBrief text={AboutData}/>
-        <SectionFooter data={SocItemData} footer_menu={FooterMenuData}/>
-      </div>
-      );
-   }
+      <TextBrief text={AboutData}/>
+    );
+  }
 }
