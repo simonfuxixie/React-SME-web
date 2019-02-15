@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
 
-import "../assets/web/assets/mobirise-icons/mobirise-icons.css";
-import "../assets/tether/tether.min.css";
-import "../assets/bootstrap/css/bootstrap.min.css";
-import "../assets/bootstrap/css/bootstrap-grid.min.css";
-import "../assets/bootstrap/css/bootstrap-reboot.min.css";
-import "../assets/dropdown/css/style.css";
-import "../assets/socicon/css/styles.css";
-import "../assets/theme/css/style.css";
-import "../assets/gallery/style.css";
-import "../assets/mobirise/css/mbr-additional.css";
-
-
 class SignupForm extends Component {
   constructor(props){
     super(props);
@@ -110,10 +98,10 @@ class SignupForm extends Component {
           <div className="row justify-content-center">
             <div className="title col-12 col-lg-8">
               <h2 className="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
-                CONTACT FORM
+                Register Form
               </h2>
               <h3 className="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
-                Easily add subscribe and contact forms without any server-side integration.
+                Easily register.
               </h3>
             </div>
           </div>

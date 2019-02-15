@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
 
-import "../assets/web/assets/mobirise-icons/mobirise-icons.css";
-import "../assets/tether/tether.min.css";
-import "../assets/bootstrap/css/bootstrap.min.css";
-import "../assets/bootstrap/css/bootstrap-grid.min.css";
-import "../assets/bootstrap/css/bootstrap-reboot.min.css";
-import "../assets/dropdown/css/style.css";
-import "../assets/socicon/css/styles.css";
-import "../assets/theme/css/style.css";
-import "../assets/gallery/style.css";
-import "../assets/mobirise/css/mbr-additional.css";
 
 class CardCountersMedia extends Component {
   render () {
@@ -19,7 +9,7 @@ class CardCountersMedia extends Component {
           <div className="card-img pb-3">
             <span className={`${this.props.card_info.card_icon} mbr-iconfont pr-2`}></span>
             <h3 className="count py-3 mbr-fonts-style display-2">
-              
+
             </h3>
           </div>
           <div className="card-text">

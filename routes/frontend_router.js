@@ -49,6 +49,11 @@ frontendRouter.get('/', (req, res) => {
       });
       break;
     default:
+      const error = [{
+        title: "error",
+        content: "no such info, please check your query.",
+      }];
+      res.send(error);
       break;
   }
 

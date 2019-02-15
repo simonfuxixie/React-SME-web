@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import axios from 'axios';
 
 // import components
-import Navbar from "../components/navbar.js";
 import FullScreenIntro from "../components/full_screen_intro";
 import Section2Col2Img from "../components/section_2col_2img";
 import Section2Col1Img from "../components/section_2col_1img";
@@ -10,21 +9,17 @@ import SectionCountersMedia from "../components/section_counters_media";
 import SectionImgButtonOn from "../components/section_imgfeature_buttonon";
 import SectionClients from "../components/section_clients";
 import ContactForm from "../components/section_contact_form";
-import SectionFooter from "../components/section_footer";
+
 // import data
-// import { NavbarItems } from "../data/json_data.js";
 // import {FullScreenIntroData} from "../data/json_data.js";
 import {DataServicesData} from "../data/json_data.js";
-// import {TextOnImgData} from "../data/json_data.js";
 import {ECommerceData} from "../data/json_data.js";
-// import {ImgBelowContentData} from "../data/json_data.js";
 import {CountersAndMediaData} from "../data/json_data.js";
 import {ImgButtonsOnData} from "../data/json_data.js";
 import {ClientCarouselData} from "../data/json_data.js";
-import {SocItemData} from "../data/json_data.js";
-import {FooterMenuData} from "../data/json_data.js";
+
 // create component
-class ViewHome extends Component {
+class ViewHome extends PureComponent {
   constructor(props){
     super(props);
     this.state = {
@@ -34,8 +29,8 @@ class ViewHome extends Component {
 
   async componentDidMount(){
     const data1 = await this.getData('/frontenddata?target=fullscreenintro');
-    this.setState({
-      fullscreenintro: data1,
+    this.setState(() => {
+      return {fullscreenintro: data1,};
     });
 
   }
@@ -48,6 +43,11 @@ class ViewHome extends Component {
       return data;
     } catch(err){
       console.error(err);
+      let data = [{
+        title: err.title || "error",
+        content: err.message || "cannot fetch data.",
+      }];
+      return data;
     }
   }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 
 import ViewHome from "./views/home";
 import ViewProducts from "./views/products";
@@ -12,7 +12,7 @@ import ViewTerms from "./views/terms";
 import ViewError from "./views/error";
 import Navigation from "./views/navigation";
 import SectionFooter from "./components/section_footer";
-// import ViewSignup from "./views/signup";
+
 // {BrowserRouter, Route, Switch, Link, NavLink, Redirect, Prompt }
 import {BrowserRouter, Route, Switch } from "react-router-dom";
 

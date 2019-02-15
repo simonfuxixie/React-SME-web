@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
-import Navbar from '../components/navbar';
-import SectionFooter from '../components/section_footer';
 
 export default class ViewTerms extends Component {
 
@@ -16,7 +13,7 @@ export default class ViewTerms extends Component {
             <p>Terms:
             </p>
           </div>
-        </div>        
+        </div>
       </div>
       );
    }

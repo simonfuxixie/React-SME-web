@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {Component, } from 'react';
+import ReactLoading from 'react-loading';
 import axios from 'axios';
 
 import Navbar from "../components/navbar.js";
-import { NavbarItems } from "../data/json_data.js";
 
 class Navigation extends Component {
   constructor(props){
@@ -15,10 +14,9 @@ class Navigation extends Component {
 
   async componentDidMount(){
     const data = await this.getData('/frontenddata?target=navbaritems');
-    this.setState({
-      navbarItems: data,
+    this.setState(() => {
+      return {navbarItems: data,};
     });
-
   }
 
   async getData(dataTarget){
@@ -32,20 +30,23 @@ class Navigation extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProp, nextState){
+    return ( this.state.navbarItems === nextState.navbarItems ? false : true );
+  }
+
   render () {
     return (
-        <Navbar data={this.state.navbarItems}/>
+      <div>
+        {
+          (this.state.navbarItems.length > 0) ?
+          (<Navbar data={this.state.navbarItems}/>) :
+          (<ReactLoading type={'bubbles'} color={'red'} height={80} width={300}/>)
+        }
+      </div>
+
     );
   }
 
 }
 
 export default Navigation;
-// <NavLink> A special version of the <Link> that will add styling attributes to the rendered element when it matches the current URL.
-// <div>
-//   <NavLink exact={true} activeStyle={{color:'red', }} to="/">Home</NavLink>
-//   <NavLink exact={true} activeStyle={{color:'red', }} to="/e_commerce">E-commerce</NavLink>
-//   <NavLink exact={true} activeStyle={{color:'red', }} to="/products">AI services</NavLink>
-//   <NavLink exact={true} activeStyle={{color:'red', }} to="/data_services">Data services</NavLink>
-//   <NavLink exact={true} activeStyle={{color:'red', }} to="/website_app">Web & mobile App</NavLink>
-// </div>

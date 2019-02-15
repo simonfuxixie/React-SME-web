@@ -1,16 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import ReactLoading from 'react-loading';
-
-import "../assets/web/assets/mobirise-icons/mobirise-icons.css";
-import "../assets/tether/tether.min.css";
-import "../assets/bootstrap/css/bootstrap.min.css";
-import "../assets/bootstrap/css/bootstrap-grid.min.css";
-import "../assets/bootstrap/css/bootstrap-reboot.min.css";
-import "../assets/dropdown/css/style.css";
-import "../assets/socicon/css/styles.css";
-import "../assets/theme/css/style.css";
-import "../assets/gallery/style.css";
-import "../assets/mobirise/css/mbr-additional.css";
 
 class FullScreenIntro extends Component {
   // constructor(props){
@@ -41,16 +30,16 @@ class FullScreenIntro extends Component {
             <div className="mbr-white col-md-10">
               <h1 className="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">
                 {
-                  this.props.data ?
+                  this.props.data.length > 0 ?
                   this.displayData(title) :
-                  <ReactLoading type={'bars'} color={'red'} height={100} width={600}/>
+                  <ReactLoading type={'bubbles'} color={'red'} height={80} width={200}/>
                 }
               </h1>
               <p className="mbr-text pb-3 mbr-fonts-style display-5">
                 {
-                  this.props.data ?
+                  this.props.data.length > 0 ?
                   this.displayData(content) :
-                  <ReactLoading type={'bubbles'} color={'red'} height={200} width={800}/>
+                  <ReactLoading type={'bubbles'} color={'red'} height={80} width={200}/>
                 }
               </p>
             </div>

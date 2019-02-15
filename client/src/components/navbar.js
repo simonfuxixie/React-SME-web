@@ -5,17 +5,7 @@ import Hamburger from "./hamburger";
 import MenuLogo from "./menu_logo";
 import NavbarButton from "./navbar_button";
 import NavItem from "./nav_item";
-// import CSS
-import "../assets/web/assets/mobirise-icons/mobirise-icons.css";
-import "../assets/tether/tether.min.css";
-import "../assets/bootstrap/css/bootstrap.min.css";
-import "../assets/bootstrap/css/bootstrap-grid.min.css";
-import "../assets/bootstrap/css/bootstrap-reboot.min.css";
-import "../assets/dropdown/css/style.css";
-import "../assets/socicon/css/styles.css";
-import "../assets/theme/css/style.css";
-import "../assets/gallery/style.css";
-import "../assets/mobirise/css/mbr-additional.css";
+
 // constant
 const URL = "/";
 const CONTACT_URL = "/#form1-m";
@@ -44,9 +34,9 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
                 {
-                  this.props.data ?
-                  this.createNavbarItems() :
-                  <ReactLoading />
+                  (this.props.data.length > 0) ?
+                  (this.createNavbarItems()) :
+                  (<ReactLoading type={'bubbles'} color={'red'} height={40} width={140}/>)
                 }
               </ul>
               <NavbarButton url={CONTACT_URL}/>

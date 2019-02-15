@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
-
 import SocItem from "./soc_item";
 
-import "../assets/web/assets/mobirise-icons/mobirise-icons.css";
-import "../assets/tether/tether.min.css";
-import "../assets/bootstrap/css/bootstrap.min.css";
-import "../assets/bootstrap/css/bootstrap-grid.min.css";
-import "../assets/bootstrap/css/bootstrap-reboot.min.css";
-import "../assets/dropdown/css/style.css";
-import "../assets/socicon/css/styles.css";
-import "../assets/theme/css/style.css";
-import "../assets/gallery/style.css";
-import "../assets/mobirise/css/mbr-additional.css";
-
-const Copy_Right = "© Copyright WestApps - All Rights Reserved";
 const WestAppsLogo ='../assets/images/westapps_logo.png';
 
 class SectionFooter extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      year: new Date().getFullYear(),
+    };
+  }
 
   createSocItem = () => {
     const data = this.props.data;
@@ -69,7 +62,7 @@ class SectionFooter extends Component {
             <div className="media-container-row mbr-white">
               <div className="col-md-6 copyright">
                 <p className="mbr-text mbr-fonts-style display-7">
-                  {Copy_Right}
+                  Copyright &copy; {this.state.year} WestApps - All Rights Reserved
                 </p>
               </div>
               <div className="col-md-6">
