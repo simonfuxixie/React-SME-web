@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react';
+import React, { Component, } from 'react';
 import axios from 'axios';
 
 // import components
@@ -19,7 +19,7 @@ import {ImgButtonsOnData} from "../data/json_data.js";
 import {ClientCarouselData} from "../data/json_data.js";
 
 // create component
-class ViewHome extends PureComponent {
+class ViewHome extends Component {
   constructor(props){
     super(props);
     this.state = {

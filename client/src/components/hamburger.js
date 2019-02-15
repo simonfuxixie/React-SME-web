@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-class Hamburger extends Component {
-  render(){
+const Hamburger = (props) => {
+
     return (
       <button className="navbar-toggler navbar-toggler-right" type="button"
         data-toggle="collapse"
@@ -19,7 +19,7 @@ class Hamburger extends Component {
         </div>
       </button>
     );
-  }
+
 }
 
 export default Hamburger;

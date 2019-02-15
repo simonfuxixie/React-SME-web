@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-
-class MenuLogo extends Component {
-  render () {
-    return (
-      <div className="menu-logo">
-        <div className="navbar-brand">
-          <span className="navbar-logo">
-            <a href={this.props.url}>
-              <img src={this.props.logo} alt={this.props.name} style={{height: 3.8 + "rem", }} />
-            </a>
-          </span>
-          <span className="navbar-caption-wrap">
-            <a className="navbar-caption text-black display-4" href={this.props.url}>
-              {}
-            </a>
-          </span>
-        </div>
+const MenuLogo = (props) => {
+  return (
+    <div className="menu-logo">
+      <div className="navbar-brand">
+        <span className="navbar-logo">
+          <a href={props.url}>
+            <img src={props.logo} alt={props.name} style={{height: 3.8 + "rem", }} />
+          </a>
+        </span>
+        <span className="navbar-caption-wrap">
+          <a className="navbar-caption text-orange display-4" href={props.url}>
+            Home
+          </a>
+        </span>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
 
 export default MenuLogo;
