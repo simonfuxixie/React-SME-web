@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import CardCountersMedia from "./card_counters_media";
-
+// Version 1 (timestamp), Version 4 (random)
+const uuidv4 = require('uuid/v4');
 
 class SectionCountersMedia extends Component {
 
@@ -10,7 +10,7 @@ class SectionCountersMedia extends Component {
     const data = this.props.data.card;
     let i = 0;
     for (let value of data) {
-      cardsList.push(<CardCountersMedia card_info={value} key={i}/>);
+      cardsList.push(<CardCountersMedia card_info={value} key={uuidv4()}/>);
       i ++;
     }
     return cardsList;

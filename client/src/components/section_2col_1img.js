@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import CardText from "./card_text";
+// Version 1 (timestamp), Version 4 (random)
+const uuidv4 = require('uuid/v4');
 
 
 class Section2Col1Img extends Component {
@@ -10,7 +11,7 @@ class Section2Col1Img extends Component {
     const data = this.props.data.card;
     let i = 0;
     for (let value of data) {
-      cardTextList.push(<CardText card_info={value} key={i}/>);
+      cardTextList.push(<CardText card_info={value} key={uuidv4()}/>);
       i ++;
     }
     return cardTextList;

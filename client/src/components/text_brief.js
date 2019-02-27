@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-
+// Version 1 (timestamp), Version 4 (random)
+const uuidv4 = require('uuid/v4');
 
 export default class TextBrief extends Component {
 
   createTextList = () => {
     const textList = [];
     for (let value of this.props.text) {
-      textList.push(<li style={{marginTop:"15px",}} key={value.subtitle}><strong>{value.subtitle}</strong> - {value.content}</li>);
+      textList.push(<li style={{marginTop:"15px",}} key={uuidv4()}><strong>{value.subtitle}</strong> - {value.content}</li>);
     }
     return textList;
   }

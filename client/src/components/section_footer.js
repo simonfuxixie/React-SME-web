@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import SocItem from "./soc_item";
 
 const WestAppsLogo ='../assets/images/westapps_logo.png';
+// Version 1 (timestamp), Version 4 (random)
+const uuidv4 = require('uuid/v4');
 
 class SectionFooter extends Component {
   constructor(props){
@@ -17,7 +19,7 @@ class SectionFooter extends Component {
       <SocItem
         href={item.href}
         class={item.class}
-        key={index}/>
+        key={uuidv4()}/>
     );
     return socItemList;
   }
@@ -27,7 +29,7 @@ class SectionFooter extends Component {
     const menuList = menu.map((item) =>
       <a href={item.href}
          className="text-black"
-         key={item.menu_item}
+         key={uuidv4()}
          style={{paddingLeft:"20px"}}>
          {item.menu_item}
        </a>

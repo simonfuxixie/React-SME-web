@@ -1,4 +1,4 @@
-import React, { Component, } from 'react';
+import React, { PureComponent } from 'react';
 
 import ViewHome from "./views/home";
 import ViewProducts from "./views/products";
@@ -19,7 +19,7 @@ import {BrowserRouter, Route, Switch } from "react-router-dom";
 import {FooterMenuData} from "./data/json_data.js";
 import {SocItemData} from "./data/json_data.js";
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
       <BrowserRouter>

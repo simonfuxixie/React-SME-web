@@ -6,6 +6,9 @@ import MenuLogo from "./menu_logo";
 import NavbarButton from "./navbar_button";
 import NavItem from "./nav_item";
 
+// Version 1 (timestamp), Version 4 (random)
+const uuidv4 = require('uuid/v4');
+
 // constant
 const URL = "/";
 const CONTACT_URL = "/#form1-m";
@@ -17,7 +20,7 @@ class Navbar extends Component {
     const data = this.props.data;
     const navbarItemsList = [];
     data.forEach( (value) => {
-      navbarItemsList.push(<NavItem info={value} key={value.nav_item_name}/>);
+      navbarItemsList.push(<NavItem info={value} key={uuidv4()}/>);
     });
     return navbarItemsList;
   }

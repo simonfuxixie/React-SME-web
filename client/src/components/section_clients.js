@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CarouselItem from "./carousel_item";
-
+// Version 1 (timestamp), Version 4 (random)
+const uuidv4 = require('uuid/v4');
 
 
 class SectionClients extends Component {
@@ -8,7 +9,7 @@ class SectionClients extends Component {
   createCarouselItem = () => {
     let carouselItemsList = [];
     for (let i = 0; i < this.props.data.length; i ++) {
-      carouselItemsList.push(<CarouselItem src={this.props.data[i]} key={i} />);
+      carouselItemsList.push(<CarouselItem src={this.props.data[i]} key={uuidv4()} />);
     }
     return carouselItemsList;
   }
