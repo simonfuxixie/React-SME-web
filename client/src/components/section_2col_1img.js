@@ -6,18 +6,19 @@ const uuidv4 = require('uuid/v4');
 
 class Section2Col1Img extends Component {
 
-  createCardText = () => {
-    const cardTextList = [];
-    const data = this.props.data.card;
-    let i = 0;
-    for (let value of data) {
-      cardTextList.push(<CardText card_info={value} key={uuidv4()}/>);
-      i ++;
-    }
-    return cardTextList;
-  }
+  // createCardText = () => {
+  //   const cardTextList = [];
+  //   const data = this.props.data.card;
+  //   let i = 0;
+  //   for (let value of data) {
+  //     cardTextList.push(<CardText card_info={value} key={uuidv4()}/>);
+  //     i ++;
+  //   }
+  //   return cardTextList;
+  // }
 
   render(){
+    const createCardText = this.props.data.card.map( value => <CardText card_info={value} key={uuidv4()}/>);
     return (
       <section className="features14 cid-rdGSvMnXrN" id="features14-j">
         <div className="container align-center">
@@ -29,7 +30,7 @@ class Section2Col1Img extends Component {
           </h3>
           <div className="media-container-column">
             <div className="row justify-content-center">
-              {this.createCardText()}
+              {createCardText}
             </div>
             <div className="media-container-row image-row">
               <div className="mbr-figure" style={{width: "60%",}}>

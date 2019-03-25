@@ -5,18 +5,19 @@ const uuidv4 = require('uuid/v4');
 
 class SectionCountersMedia extends Component {
 
-  createCards = () => {
-    const cardsList = [];
-    const data = this.props.data.card;
-    let i = 0;
-    for (let value of data) {
-      cardsList.push(<CardCountersMedia card_info={value} key={uuidv4()}/>);
-      i ++;
-    }
-    return cardsList;
-  }
+  // createCards = () => {
+  //   const cardsList = [];
+  //   const data = this.props.data.card;
+  //   let i = 0;
+  //   for (let value of data) {
+  //     cardsList.push(<CardCountersMedia card_info={value} key={uuidv4()}/>);
+  //     i ++;
+  //   }
+  //   return cardsList;
+  // }
 
   render() {
+    const createCards = this.props.data.card.map( value => <CardCountersMedia card_info={value} key={uuidv4()}/>);
     return (
       <section className="counters2 counters cid-rdGWxRrN8F" id="counters2-k">
         <div className="container pt-4 mt-2">
@@ -34,7 +35,7 @@ class SectionCountersMedia extends Component {
             </div>
             <div className="cards-block">
               <div className="cards-container">
-                {this.createCards()}
+                {createCards}
               </div>
             </div>
           </div>

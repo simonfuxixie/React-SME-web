@@ -117,10 +117,10 @@ router.use(function(req, res, next) {
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, './client/build', 'index.html'));
 });
-app.get('/products', (req,res) =>{
+app.get('/ar_services', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
-app.get('/data_services', (req,res) =>{
+app.get('/ai_services', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 app.get('/website_app', (req,res) =>{

@@ -6,15 +6,16 @@ const uuidv4 = require('uuid/v4');
 
 class SectionClients extends Component {
 
-  createCarouselItem = () => {
-    let carouselItemsList = [];
-    for (let i = 0; i < this.props.data.length; i ++) {
-      carouselItemsList.push(<CarouselItem src={this.props.data[i]} key={uuidv4()} />);
-    }
-    return carouselItemsList;
-  }
+  // createCarouselItem = () => {
+  //   let carouselItemsList = [];
+  //   for (let i = 0; i < this.props.data.length; i ++) {
+  //     carouselItemsList.push(<CarouselItem src={this.props.data[i]} key={uuidv4()} />);
+  //   }
+  //   return carouselItemsList;
+  // }
 
   render(){
+    const createCarouselItem = this.props.data.map( item => <CarouselItem src={item} key={uuidv4()} />);
     return (
       <section className="clients cid-rdGXwfwdfE" id="clients-n">
         <div className="container mb-5">
@@ -29,7 +30,7 @@ class SectionClients extends Component {
         <div className="container">
           <div className="carousel slide" data-ride="carousel" role="listbox" id="clients-n-carousel">
             <div className="carousel-inner" data-visible="5">
-              {this.createCarouselItem()}
+              {createCarouselItem}
             </div>
           </div>
         </div>

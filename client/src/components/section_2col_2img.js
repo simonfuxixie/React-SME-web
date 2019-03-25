@@ -7,15 +7,16 @@ const uuidv4 = require('uuid/v4');
 
 class Section2Col2Img extends Component {
 
-  createCart = () => {
-    let cartList = [];
-    for (let i = 0; i < this.props.data.item.length; i ++ ) {
-      cartList.push(<TextOnImg  item={this.props.data.item[i]} key={uuidv4()}/>);
-    }
-    return cartList;
-  }
+  // createCart = () => {
+  //   let cartList = [];
+  //   for (let i = 0; i < this.props.data.item.length; i ++ ) {
+  //     cartList.push(<TextOnImg  item={this.props.data.item[i]} key={uuidv4()}/>);
+  //   }
+  //   return cartList;
+  // }
 
   render(){
+    const createCart = this.props.data.item.map( item => <TextOnImg  item={item} key={uuidv4()}/>);
     return (
       <section className="features13 cid-rdGSslSClW" id="features13-i">
         <div className="container">
@@ -23,7 +24,7 @@ class Section2Col2Img extends Component {
             {this.props.data.title}
           </h2>
           <div className="media-container-row container">
-            {this.createCart()}
+            {createCart}
           </div>
         </div>
       </section>

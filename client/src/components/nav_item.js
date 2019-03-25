@@ -5,23 +5,31 @@ import React, { Component } from 'react';
 
 class NavItem extends Component {
 
-  createDropdownItem = () => {
-    const items = this.props.info.nav_subitems;
-    const listItems = [];
-    for (let value of items) {
-      listItems.push(
-        <a className="text-black dropdown-item display-4"
-          href={value.url}
-          aria-expanded="false"
-        >
-          {value.name}
-        </a>);
-      // listItems.push(<MenuDropdownItem url={value.url} content={value.name} key={value.name}/>);
-    }
-    return listItems;
-  }
+  // createDropdownItem = () => {
+  //   const items = this.props.info.nav_subitems;
+  //   const listItems = [];
+  //   for (let value of items) {
+  //     listItems.push(
+  //       <a className="text-black dropdown-item display-4"
+  //         href={value.url}
+  //         aria-expanded="false"
+  //       >
+  //         {value.name}
+  //       </a>);
+  //     // listItems.push(<MenuDropdownItem url={value.url} content={value.name} key={value.name}/>);
+  //   }
+  //   return listItems;
+  // }
 
   render(){
+    const createDropdownItem = this.props.info.nav_subitems.map( value => (
+      <a className="text-black dropdown-item display-4"
+        href={value.url}
+        aria-expanded="false"
+      >
+        {value.name}
+      </a>));
+
     return (
       <li className="nav-item dropdown ">
         <a className="nav-link link text-black dropdown-toggle display-4"
@@ -31,7 +39,7 @@ class NavItem extends Component {
         >{this.props.info.nav_item_name}
         </a>
         <div className="dropdown-menu">
-          {this.createDropdownItem()}
+          {createDropdownItem}
         </div>
       </li>
     );

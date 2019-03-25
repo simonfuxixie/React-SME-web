@@ -21,9 +21,9 @@ const FullScreenIntro = (props) => {
 
   return (
     <section className="cid-rdFUiroViD mbr-parallax-background" id="header2-f" style={{zIndex: 0, display: 'block', margin: '2px', padding: '100px', position: 'relative', top:'80px',}}>
-      <div className="mbr-overlay" style={{opacity: 0.6, backgroundColor: "rgb(118, 118, 118)",}}></div>
+      <div className="mbr-overlay" style={{opacity: 0.1, backgroundColor: "rgb(118, 118, 118)",}}></div>
       <div className="container align-center">
-        <div className="row justify-content-md-center">
+        <div className="row justify-content-md-center" style={{height:"300px"}}>
           <div className="mbr-white col-md-10">
             <h1 className="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">
               {displayContent('title')}

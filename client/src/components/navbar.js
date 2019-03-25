@@ -16,17 +16,18 @@ const WestAppsLogo = "../assets/images/logo2.png";
 // component
 class Navbar extends Component {
 
-  createNavbarItems = () => {
-    const data = this.props.data;
-    const navbarItemsList = [];
-    data.forEach( (value) => {
-      navbarItemsList.push(<NavItem info={value} key={uuidv4()}/>);
-    });
-    return navbarItemsList;
-  }
+  // createNavbarItems = () => {
+  //   const data = this.props.data;
+  //   const navbarItemsList = [];
+  //   data.forEach( (value) => {
+  //     navbarItemsList.push(<NavItem info={value} key={uuidv4()}/>);
+  //   });
+  //   return navbarItemsList;
+  // }
 
 
   render() {
+    const createNavbarItems = this.props.data.map( value => <NavItem info={value} key={uuidv4()}/>);
     return (
       <section className="menu cid-rdAxkJxqpX" id="menu2-9"
         style={{margin:'10px', padding:'10px', backgroundColor:"transparent", }}
@@ -38,7 +39,7 @@ class Navbar extends Component {
               <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
                 {
                   (this.props.data.length > 0) ?
-                  (this.createNavbarItems()) :
+                  createNavbarItems :
                   (<ReactLoading type={'bubbles'} color={'red'} height={40} width={140}/>)
                 }
               </ul>
