@@ -37,6 +37,13 @@ class Navbar extends Component {
             <MenuLogo url= {URL} logo={WestAppsLogo} name="WestApps" />
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                <li className="nav-item dropdown ">
+                  <a className="nav-link link text-black display-4"
+                    href="/"
+                    aria-expanded="true"
+                  > Home
+                  </a>
+                </li>
                 {
                   (this.props.data.length > 0) ?
                   createNavbarItems :

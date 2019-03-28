@@ -9,10 +9,7 @@ const MenuLogo = (props) => {
             <img src={props.logo} alt={props.name} style={{height: 3.8 + "rem", }} />
           </a>
         </span>
-        <span className="navbar-caption-wrap">
-          <a className="navbar-caption text-orange display-4" href={props.url}>
-            Home
-          </a>
+        <span className="navbar-caption-wrap">          
         </span>
       </div>
     </div>
