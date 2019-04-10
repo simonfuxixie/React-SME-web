@@ -1,61 +1,57 @@
 import React, { Component } from 'react';
-// import components
-import ReactLoading from 'react-loading';
-import Hamburger from "./hamburger";
-import MenuLogo from "./menu_logo";
-import NavbarButton from "./navbar_button";
-import NavItem from "./nav_item";
 
-// Version 1 (timestamp), Version 4 (random)
-const uuidv4 = require('uuid/v4');
+const Navbar = (props) => {
+  return (
+      <div className="header">
+          <div className="menu">
+              <div className="container">
+                <nav className="navbar navbar-inverse">
+                  <div className="container-fluid">
+                    <div className="navbar-header">
+                      <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                      </button>
+                      <a className="navbar-brand" href="/"><img src="assets/img/logo2.png" alt="WestApps"/></a>
+                    </div>
+                    <ul className="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
 
-// constant
-const URL = "/";
-const CONTACT_URL = "/#form1-m";
-const WestAppsLogo = "../assets/images/logo2.png";
-// component
-class Navbar extends Component {
+                      <li className="active"><a href="/">Home</a></li>
 
-  // createNavbarItems = () => {
-  //   const data = this.props.data;
-  //   const navbarItemsList = [];
-  //   data.forEach( (value) => {
-  //     navbarItemsList.push(<NavItem info={value} key={uuidv4()}/>);
-  //   });
-  //   return navbarItemsList;
-  // }
+                      <li className="dropdown">
+                        <a className="dropdown-toggle" data-toggle="dropdown" href="#">Artificial Intelligence
+                        <span className="caret"></span></a>
+                        <ul className="dropdown-menu">
+                          <li><a href="ai_services">Artificial Intelligence </a></li>
+                        </ul>
+                      </li>
 
+                      <li className="dropdown">
+                        <a className="dropdown-toggle" data-toggle="dropdown" href="#">Web &amp; Mobile App
+                        <span className="caret"></span></a>
+                        <ul className="dropdown-menu">
+                          <li><a href="website_app">Web &amp; Mobile App</a></li>
+                        </ul>
+                      </li>
 
-  render() {
-    const createNavbarItems = this.props.data.map( value => <NavItem info={value} key={uuidv4()}/>);
-    return (
-      <section className="menu cid-rdAxkJxqpX" id="menu2-9"
-        style={{margin:'10px', padding:'10px', backgroundColor:"transparent", }}
-      >
-          <nav style={this.props.style} className="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
-            <Hamburger />
-            <MenuLogo url= {URL} logo={WestAppsLogo} name="WestApps" />
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
-                <li className="nav-item dropdown ">
-                  <a className="nav-link link text-black display-4"
-                    href="/"
-                    aria-expanded="true"
-                  > Home
-                  </a>
-                </li>
-                {
-                  (this.props.data.length > 0) ?
-                  createNavbarItems :
-                  (<ReactLoading type={'bubbles'} color={'red'} height={40} width={140}/>)
-                }
-              </ul>
-              <NavbarButton url={CONTACT_URL}/>
-            </div>
-          </nav>
-      </section>
+                      <li className="dropdown">
+                        <a className="dropdown-toggle" data-toggle="dropdown" href="#">Augmented Reality
+                        <span className="caret"></span></a>
+                        <ul className="dropdown-menu">
+                          <li><a href="ar_services">Augmented Reality</a></li>
+                        </ul>
+                      </li>
+
+                      <li className="tarik-button1"><a href="/#tarik-contact">Contact Us</a></li>
+
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+          </div>
+      </div>
     );
-  }
 }
 
 export default Navbar;

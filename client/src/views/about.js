@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import TextBrief from "../components/text_brief";
 
-// import data
-import {AboutData} from "../data/json_data.js";
+import AboutHeaderImg from "../components/about_header_img";
+import AboutContent from "../components/about_content";
+import SectionTeam from "../components/section_team";
+import SectionDemo from "../components/section_demo";
 
-export default class ViewAbout extends Component {
-  render () {
-    return (
-      <TextBrief text={AboutData}/>
-    );
-  }
+
+const ViewAbout = (props) => {
+  return (
+    <div>
+      <AboutHeaderImg />
+      <AboutContent />
+      <SectionTeam />
+      <SectionDemo />
+    </div>
+  );
 }
+
+export default ViewAbout;

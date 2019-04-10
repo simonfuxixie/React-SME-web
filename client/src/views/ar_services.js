@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import SectionCountersMedia from "../components/section_counters_media";
-// import data
-import {ARServicesData} from "../data/json_data.js";
+import ArHeaderImg from "../components/ar_header_img";
+import ArContent from "../components/ar_content";
+import SectionDemo from "../components/section_demo";
 
-export default class ViewARServices extends Component {
 
-  render () {
-    return (
-      <div>
-        <SectionCountersMedia data={ARServicesData}/>
-      </div>
-      );
-   }
+const ViewARServices = (props) => {
+  return (
+    <div>
+      <ArHeaderImg />
+      <ArContent />
+      <SectionDemo />
+    </div>
+    );
 }
+
+export default ViewARServices;

@@ -55,92 +55,41 @@ class ContactForm extends Component {
   render(){
     const {name, email, phone, message,time,} = this.state;
     return (
-      <section className="mbr-section form1 cid-rdGXhy5QzL" id="form1-m">
+      <div className="tarik-contact-us" id="tarik-contact">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="title col-12 col-lg-8">
-              <h2 className="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
-                CONTACT FORM
-              </h2>
-              <h3 className="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
-                Easily fill in the following form and we will get back to you soon.
-              </h3>
-            </div>
+          <div className="tarik-cu-head">
+            <h1>Contact Us</h1>
+            <p>Easily fill in the following form and we will get back to you soon.</p>
+            <p>{this.state.responseMessage}</p>
           </div>
-        </div>
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="media-container-column col-lg-8">
-              <div data-form-alert="" hidden="">
-                <h5 className="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-6">
-                 {this.state.responseMessage}
-                </h5>
-              </div>
-              <form className="mbr-form" onSubmit={this.handleSubmit}>
-                <div className="row row-sm-offset">
-                  <div className="col-md-4 multi-horizontal">
-                    <div className="form-group">
-                      <label className="form-control-label mbr-fonts-style display-7">Name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        data-parse="uppercase"
-                        className="form-control"
-                        value={name}
-                        onChange={this.handleInputChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4 multi-horizontal">
-                    <div className="form-group">
-                      <label className="form-control-label mbr-fonts-style display-7">Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        className="form-control"
-                        value={email}
-                        onChange={this.handleInputChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4 multi-horizontal">
-                    <div className="form-group">
-                      <label className="form-control-label mbr-fonts-style display-7">Phone</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        className="form-control"
-                        value={phone}
-                        onChange={this.handleInputChange}
-                      />
+          <div className="tarik-cu-form">
+            <row>
+              <div className="col-xl-6 col-xl-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+                <form id="contact" onSubmit={this.handleSubmit}>
+                    <fieldset>
+                      <input placeholder="Full Name" name="name" value={name} type="text" tabindex="1" onChange={this.handleInputChange} required />
+                    </fieldset>
+                    <fieldset>
+                      <input placeholder="Email Address" type="email" name="email" value={email} tabindex="2" onChange={this.handleInputChange} required />
+                    </fieldset>
+                    <fieldset>
+                      <input placeholder="Phone Number" type="tel" name="phone" tabindex="3" value={phone} onChange={this.handleInputChange} required />
+                    </fieldset>
+                    <fieldset>
                       <input type="hidden" name="time" value={time} />
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label className="form-control-label mbr-fonts-style display-7">Message</label>
-                  <textarea
-                    type="text"
-                    name="message"
-                    className="form-control"
-                    value={message}
-                    onChange={this.handleInputChange}
-                  >
-                  </textarea>
-                </div>
-                <span className="input-group-btn">
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-form display-4"
-                  >
-                    SEND MESSAGE
-                  </button>
-                </span>
-              </form>
-            </div>
+                    </fieldset>
+                    <fieldset>
+                      <textarea placeholder="Type your message here...." name="message" value={message} tabindex="5" onChange={this.handleInputChange} required></textarea>
+                    </fieldset>
+                    <fieldset>
+                      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">SEND MESSAGE</button>
+                    </fieldset>
+                  </form>
+              </div>
+            </row>
           </div>
         </div>
-      </section>
+      </div>
     );
   }
 }

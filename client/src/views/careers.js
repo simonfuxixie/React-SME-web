@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import TextBrief from "../components/text_brief";
-
-import {CareerData} from "../data/json_data.js";
-
+import CareerHeaderImg from "../components/career_header_img";
+import CareerContent from "../components/career_content";
+import SectionDemo from "../components/section_demo";
 
 export default class ViewAbout extends Component {
-
   render () {
     return (
-      <TextBrief text={CareerData}/>
+      <div>
+        <CareerHeaderImg />
+        <CareerContent />
+        <SectionDemo />
+      </div>
     );
   }
 }

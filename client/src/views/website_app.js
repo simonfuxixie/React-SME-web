@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 
-import Section2Col1Img from "../components/section_2col_1img";
+import AppHeaderImg from "../components/app_header_img";
+import AppContent from "../components/app_content";
+import SectionDemo from "../components/section_demo";
 
-// import data
-import {WebsiteAppData} from "../data/json_data.js";
-
-export default class ViewWebsiteApp extends Component {
-
-  render () {
-    return (
-      <div>
-        <div>
-          <Section2Col1Img data={WebsiteAppData}/>
-        </div>
-      </div>
-      );
-   }
+const ViewWebsiteApp = (props) => {
+  return (
+    <div>
+      <AppHeaderImg />
+      <AppContent />
+      <SectionDemo />
+    </div>
+    );
 }
+
+export default ViewWebsiteApp;
