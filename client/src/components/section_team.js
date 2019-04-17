@@ -12,22 +12,22 @@ const SectionTeam = (props) => {
     			<p>You simply hire a great team and we’ve handpicked the best.</p>
     		</div>
     		<div className="tarik-tram-body">
-    			<div className="owl-carousel tc2 owl-theme">
-    					<div className="item">
-    						<div className="ttb-con">
-    							<div className="ttb-con-img"><img src="assets/img/t-member-1.jpg" alt="" /></div>
-    							<div className="ttb-con-text">
-    								<h4>Simon Xie</h4>
-    								<p>Business Analyst <br/>Full Stack Developer <br/>Project Coordinator</p>
-    							</div>
-    						</div>
-    					</div>
+    			<div className="owl-carousel tc2 owl-theme">    					
     					<div className="item">
     						<div className="ttb-con">
     							<div className="ttb-con-img"><img src="assets/img/t-member-2.jpg" alt="" /></div>
     							<div className="ttb-con-text">
     								<h4>Wilson Yan</h4>
     								<p>Computer Vision Expert <br/>AI Algorithm Engineer <br/>Full Stack Developer</p>
+    							</div>
+    						</div>
+    					</div>
+              <div className="item">
+    						<div className="ttb-con">
+    							<div className="ttb-con-img"><img src="assets/img/t-member-1.jpg" alt="" /></div>
+    							<div className="ttb-con-text">
+    								<h4>Simon Xie</h4>
+    								<p>Business Analyst <br/>Full Stack Developer <br/>Project Coordinator</p>
     							</div>
     						</div>
     					</div>

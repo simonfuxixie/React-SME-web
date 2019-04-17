@@ -14,7 +14,7 @@ const SectionDemo = (props) => {
               <div className="col-md-4 col-sm-4 col-md-12">
                 <div className="tes-content">
                   <a href="#">
-                    <div className="tes-con-sc"><img src="assets/img/demo04.jpg" alt="Demo"/></div>
+                    <div className="tes-con-sc"><img src="assets/img/demo08.jpg" alt="Demo"/></div>
                     <div className="tes-con-name">Vehicle & Plate Recognition</div>
                   </a>
                 </div>
@@ -22,8 +22,8 @@ const SectionDemo = (props) => {
               <div className="col-md-4 col-sm-4 col-md-12">
                 <div className="tes-content">
                   <a href="#">
-                    <div className="tes-con-sc"><img src="assets/img/demo05.jpg" alt="Demo"/></div>
-                    <div className="tes-con-name">Food & Delivery</div>
+                    <div className="tes-con-sc"><img src="assets/img/demo09.jpg" alt="Demo"/></div>
+                    <div className="tes-con-name">Shipment & Invoice Data Extraction</div>
                   </a>
                 </div>
               </div>
