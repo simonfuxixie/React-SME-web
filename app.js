@@ -1,3 +1,5 @@
+// 2019-05-30
+
 const createError = require('http-errors'),
       express = require('express'),
       favicon = require('serve-favicon'),
@@ -136,6 +138,9 @@ app.get('/careers', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 app.get('/contact', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+app.get('/contacts', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
