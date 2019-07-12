@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import AiHeaderImg from "../components/ai_header_img";
 import AiContent from "../components/ai_content";

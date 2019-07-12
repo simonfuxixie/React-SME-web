@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const SectionFooter = (props) => {
   return (
@@ -15,6 +15,7 @@ const SectionFooter = (props) => {
                   <a href="/about">About</a>
                   <a href="/careers">Career</a>
                   <a href="/contact">Contact</a>
+                  <a href="/privacy_policy">Privacy Policy</a>
                 </div>
               </div>
             </row>
@@ -27,7 +28,7 @@ const SectionFooter = (props) => {
           <div className="tarik-footer-bottom">
             <div className="tfb-left">Copyright &copy; 2019 WestApps - All Rights Reserved</div>
             <div className="tfb-right">
-              <a href="https://www.linkedin.com/company/westapps" target="_blank"><img src="assets/img/linkedin-logo.png" alt="" /></a>
+              <a href="https://www.linkedin.com/company/westapps" target="_blank" rel="noopener noreferrer"><img src="assets/img/linkedin-logo.png" alt="" /></a>
             </div>
           </div>
         </div>

@@ -19,7 +19,7 @@ const HomeContent = (props) => {
               </div>
               <div className="col-md-6 col-sm-6 col-xs-12">
                 <div className="tarik-content-img">
-                  <img src="assets/img/ai.jpg" alt="Image"/>
+                  <img src="assets/img/ai.jpg" alt=""/>
                 </div>
               </div>
             </row>
@@ -32,7 +32,7 @@ const HomeContent = (props) => {
             <row>
               <div className="col-md-6 col-sm-6 col-xs-12">
                 <div className="tarik-content-img">
-                  <img src="assets/img/app.jpg" alt="Image"/>
+                  <img src="assets/img/app.jpg" alt=""/>
                 </div>
               </div>
               <div className="col-md-6 col-sm-6 col-xs-12">
@@ -53,7 +53,7 @@ const HomeContent = (props) => {
             <row>
               <div className="col-md-6 col-sm-6 col-xs-12">
                 <div className="tarik-content-img">
-                  <img src="assets/img/ar.jpg" alt="Image"/>
+                  <img src="assets/img/ar.jpg" alt=""/>
                 </div>
               </div>
               <div className="col-md-6 col-sm-6 col-xs-12">

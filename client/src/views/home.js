@@ -1,4 +1,4 @@
-import React, { Component, } from 'react';
+import React from 'react';
 
 // import components
 import HomeHeaderImg from "../components/home_header_img";

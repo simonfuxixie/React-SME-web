@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import AboutHeaderImg from "../components/about_header_img";
 import AboutContent from "../components/about_content";

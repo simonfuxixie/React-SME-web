@@ -11,6 +11,7 @@
 
 # production
 /client/build
+/client/node_modules
 
 # data
 /client/src/data
