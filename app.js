@@ -1,17 +1,17 @@
-// load npm packages
 const createError = require('http-errors'),
       express = require('express'),
       favicon = require('serve-favicon'),
       path = require('path'),
       cookieParser = require('cookie-parser'),
       logger = require('morgan'),
-      bodyParser = require("body-parser"),
+      //bodyParser = require("body-parser"),
       passport = require("passport"),
       bcrypt = require('bcrypt'),
       mongoose = require('mongoose'),
       session	=	require('express-session'),
       flash	=	require('connect-flash'),
       expressValidator = require('express-validator');
+// passport local stratigy
 const LocalStrategy	=	require('passport-local').Strategy;
 const exphbs = require('express-handlebars');
 const hbsFormHelper = require('handlebars-form-helper');
@@ -25,7 +25,7 @@ Handlebars.registerHelper('assign', function (varName, varValue, options) {
     options.data.root[varName] = varValue;
 });
 
-var app = express();
+const app = express();
 
 // view engine
 const hbs = exphbs.create({
@@ -39,15 +39,19 @@ hbsFormHelper.registerHelpers(hbs.handlebars, { namespace: 'form' });
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
+// or
+// app.set('views', __dirname + '/views');
+// or
+// app.set('views', `${__dirname}/views` );
 
-// Serve static files from the React app
+// Serve static files from the create-react-app
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({extended: false}));
 
 // connect to mongodb
 var dbs = require('./dbconnection/dbconnection.js');
@@ -71,7 +75,9 @@ app.use(session({
 // express messages middleware
 app.use(flash());
 app.use(function(req,res,next) {
+  // add messages to res.locals
 	res.locals.messages = require('express-messages')(req,res);
+  // move on to next
 	next();
 });
 
@@ -79,7 +85,7 @@ app.use(function(req,res,next) {
 // Configure passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-var User = require('./models/users_model');
+const User = require('./models/users_model');
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -105,7 +111,7 @@ app.use(expressValidator({
 }));
 
 
-// routes
+// routes, initiate / instantiate a router
 const router = express.Router();
 // route middleware that will happen on every request
 router.use(function(req, res, next) {
@@ -114,7 +120,8 @@ router.use(function(req, res, next) {
     // continue doing what we were doing and go to the route
     next();
 });
-
+// for public content that do not need login
+// root routes
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, './client/build', 'index.html'));
 });
@@ -139,8 +146,12 @@ app.get('/careers', (req,res) =>{
 app.get('/contact', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
+// add privacy policy 
+app.get('/privacy_policy', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
-
+// sub routes
 const usersRouter	=	require('./routes/users');
 const adminRouter = require('./routes/admin');
 const apiRouter = require('./routes/api');
@@ -153,7 +164,7 @@ app.use('/frontenddata', frontendRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Path or File Not Found!');
+    let err = new Error('Path or File Not Found!');
     err.status = 404;
     next(err);
 });
@@ -167,6 +178,7 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
+            // displaly error details in dev environment
             error: err
         });
     });
@@ -178,6 +190,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
+        // do not displaly error details in dev environment
         error: {}
     });
 });
