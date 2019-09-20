@@ -6,13 +6,13 @@ var NavbarItems =	require('../models/webcontent/navbaritems_model');
 const isAuthenticated = require('./isauthenticated');
 
 
-navbaritemsRouter.get('/', (req, res) => {
+navbaritemsRouter.get('/', (req, res, next) => {
     res.render("navbaritems/add_or_edit", {
         title: "Insert NavbarItems"
     });
 });
 
-navbaritemsRouter.post('/', (req, res) => {
+navbaritemsRouter.post('/', (req, res, next) => {
   if (req.body._id == '') {
     insertRecord(req, res);
     } else {
@@ -20,7 +20,7 @@ navbaritemsRouter.post('/', (req, res) => {
     }
 });
 
-navbaritemsRouter.get('/list', (req, res) => {
+navbaritemsRouter.get('/list', (req, res, next) => {
     NavbarItems.find((err, recordes) => {
         if (!err) {
             res.render("navbaritems/navbaritems_list", {
@@ -30,15 +30,13 @@ navbaritemsRouter.get('/list', (req, res) => {
         }
         else {
             console.log('Error in retrieving navbaritems list :' + err);
-            res.render("navbaritems/navbaritems_list", {
-                errors: [err.name, err.message],
-            });
+            next(err);
         }
     });
 });
 
 
-navbaritemsRouter.get('/:id', (req, res) => {
+navbaritemsRouter.get('/:id', (req, res, next) => {
     NavbarItems.findById(req.params.id, (err, doc) => {
       // console.log(doc.nav_subitem[0]);
       if (!err) {
@@ -48,28 +46,24 @@ navbaritemsRouter.get('/:id', (req, res) => {
         });
       }
       else {
-        res.render("navbaritems/navbaritems_list", {
-            errors: [err.name, err.message],
-        });
+        next(err);
       }
     });
 });
 
-navbaritemsRouter.get('/delete/:id', (req, res) => {
+navbaritemsRouter.get('/delete/:id', (req, res, next) => {
   NavbarItems.findByIdAndRemove(req.params.id, (err, doc) => {
     if (!err) {
       res.redirect('/admin/navbaritems/list');
     }
     else {
-      res.render("navbaritems/navbaritems_list", {
-          errors: [err.name, err.message],
-      });
+      next(err);
     }
   });
 });
 
 navbaritemsRouter.get('/subitems/delete/:parentid/:subdocid',
-  async (req, res) => {
+  async (req, res, next) => {
     deleteSubitem(req, res);
 });
 
@@ -124,13 +118,14 @@ function insertRecord(req, res) {
           }
           else {
             console.log('Error during record insertion : ' + err);
+            next(err);
           }
 
       }
     });
 }
 
-function updateRecord(req, res) {
+function updateRecord(req, res, next) {
     let updatedInfo = getBodyInfo(req, res);
     NavbarItems.findOneAndUpdate(
       { _id: req.body._id },
@@ -149,17 +144,13 @@ function updateRecord(req, res) {
             }
             else {
               console.log('Error during record update : ' + err);
-              res.render("navbaritems/add_or_edit", {
-                  title: 'Update NavbarItems',
-                  navbaritems: req.body,
-                  errors: [err.name, err.message],
-              });
+              next(err);
             }
         }
     });
 }
 
-async function deleteSubitem (req, res) {
+async function deleteSubitem (req, res, next) {
   try {
     let navbaritem = await NavbarItems.findOne({_id: req.params.parentid}, );
     if(!navbaritem){

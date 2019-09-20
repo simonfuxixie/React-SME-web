@@ -8,7 +8,7 @@ const FullscreenIntro =	require('../models/webcontent/fullscreenintro_model');
 const isAuthenticated = require('./isauthenticated');
 
 
-frontendRouter.get('/', (req, res) => {
+frontendRouter.get('/', (req, res, next) => {
   const target = req.query.target;
   switch(target){
     case 'navbaritems':
@@ -27,7 +27,7 @@ frontendRouter.get('/', (req, res) => {
           res.status(200).send(data);
         } else {
           console.log('Error in retrieving navbaritems list :' + err);
-          res.send(err.message);
+          next(err);
         }
       });
       break;
@@ -44,16 +44,16 @@ frontendRouter.get('/', (req, res) => {
           res.status(200).send(data);
         } else {
           console.log('Error in retrieving fullscreenintro :' + err);
-          res.send(err.message);
+          next(err);
         }
       });
       break;
     default:
-      const error = [{
+      const error = new Error({
         title: "error",
         content: "no such info, please check your query.",
-      }];
-      res.send(error);
+      });
+      next(error);
       break;
   }
 
