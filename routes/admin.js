@@ -23,7 +23,7 @@ adminRouter.get('/console', isAuthenticated, function(req, res, next) {
 
 
 // user logout
-adminRouter.get('/logout', function(req,res) {
+adminRouter.get('/logout', function(req, res, next) {
 	req.logout();
 	req.flash('okMessage','You have logged out');
 	res.redirect('/');
