@@ -26,7 +26,7 @@ const SectionTeam = (props) => {
     						<div className="ttb-con">
     							<div className="ttb-con-img"><img src="assets/img/t-member-1.jpg" alt="" /></div>
     							<div className="ttb-con-text">
-    								<h4>Simon Xie</h4>
+    								<h4>David Wang</h4>
     								<p>Business Analyst <br/>Full Stack Developer <br/>Project Coordinator</p>
     							</div>
     						</div>
