@@ -21,7 +21,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
     "fs": "0.0.1-security",
-    "handlebars": "^4.0.12",
+    "handlebars": "^4.4.5",
     "handlebars-form-helper": "^1.0.3",
     "handlebars-intl": "^1.1.2",
     "http-errors": "~1.6.2",
